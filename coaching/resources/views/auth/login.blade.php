@@ -1,69 +1,127 @@
-@extends('layouts.app')
+<!DOCTYPE html>
+<html lang="en">
 
-@section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Login</div>
 
-                <div class="panel-body">
-                    <form class="form-horizontal" method="POST" action="{{ route('login') }}">
-                        {{ csrf_field() }}
+<!-- Mirrored from demos.creative-tim.com/material-kit-pro/examples/login-page.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 14 Jun 2018 06:30:58 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <!-- Favicons -->
+    <link rel="apple-touch-icon" href="png/apple-icon.png">
+    <link rel="icon" href="png/favicon.png">
+    <title>
+        Login &#45; Material Kit PRO by Creative Tim
+    </title>
+    <!-- Extra details for Live View on GitHub Pages -->
+    <!-- Canonical SEO -->
+    <link rel="canonical" href="https://www.creative-tim.com/product/material-kit-pro" />
+    <!--  Social tags      -->
+    
+    
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+    <link rel="stylesheet" href="{{ url('css/font-awesome.min.css') }}" />
+    <link rel="stylesheet" href="{{ url('css/material-kit.mine8da.css?v=2.0.3') }}">
+    <!-- Documentation extras -->
+    <!-- CSS Just for demo purpose, don't include it in your project -->
+    <link href="{{ url('css/demo.css') }}" rel="stylesheet" />
+    <link href="{{ url('css/vertical-nav.css') }}" rel="stylesheet" />
+    
+<!-- End Google Tag Manager -->
+</head>
 
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email" class="col-md-4 control-label">E-Mail Address</label>
+  <body class="login-page ">
+ 
 
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required autofocus>
-
-                                @if ($errors->has('email'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <label for="password" class="col-md-4 control-label">Password</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control" name="password" required>
-
-                                @if ($errors->has('password'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> Remember Me
-                                    </label>
+    @include('front.includes.header')
+    <div class="page-header header-filter" style=" background-size: cover; background-position: top center;">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 col-sm-6 ml-auto mr-auto">
+                    <div class="card card-signup">
+                        <form class="form" method="POST" action="{{ route('login') }}">
+                            <div class="card-header card-header-primary text-center">
+                                <h4 class="card-title">Log in</h4>
+                                <div class="social-line">
+                                    <a href="#pablo" class="btn btn-just-icon btn-link">
+                                        <i class="fa fa-facebook-square"></i>
+                                    </a>
+                                    <a href="#pablo" class="btn btn-just-icon btn-link">
+                                        <i class="fa fa-twitter"></i>
+                                    </a>
+                                    <a href="#pablo" class="btn btn-just-icon btn-link">
+                                        <i class="fa fa-google-plus"></i>
+                                    </a>
                                 </div>
                             </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-md-8 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
-                                    Login
-                                </button>
-
-                                <a class="btn btn-link" href="{{ route('password.request') }}">
-                                    Forgot Your Password?
-                                </a>
+<!--                             <p class="description text-center">Or Be Classical</p>
+ -->                            <div class="card-body">
+                                <div class="input-group">
+                                    {{ csrf_field() }}
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <i class="material-icons">mail</i>
+                                        </span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="Email..." required  name="email" value="{{ old('email') }}">
+                                </div>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <i class="material-icons">lock_outline</i>
+                                        </span>
+                                    </div>
+                                    <input type="password" class="form-control" placeholder="Password..." name="password" required>
+                                </div>
+                               
                             </div>
-                        </div>
-                    </form>
+                            <div class="footer text-center">
+                                <br>
+                                <button type="submit" class="btn btn-rose">Login</button>
+                                <br>
+                                <br>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
+        
     </div>
-</div>
-@endsection
+    <!--   Core JS Files   -->
+    <script src="{{ url('js/jquery.min.js') }}"></script>
+    <script src="{{ url('js/popper.min.js') }}"></script>
+    <script src="{{ url('js/bootstrap-material-design.min.js') }}"></script>
+    <!--  Google Maps Plugin  -->
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB2Yno10-YTnLjjn_Vtk0V8cdcY5lC4plU"></script>
+    <!--  Plugin for Date Time Picker and Full Calendar Plugin  -->
+    <script src="{{ url('js/moment.min.js') }}"></script>
+    <!--    Plugin for the Datepicker, full documentation here: https://github.com/Eonasdan/bootstrap-datetimepicker -->
+    <script src="{{ url('js/bootstrap-datetimepicker.min.js') }}"></script>
+    <!--    Plugin for the Sliders, full documentation here: https://refreshless.com/nouislider/ -->
+    <script src="{{ url('js/nouislider.min.js') }}"></script>
+    <!--    Plugin for Select, full documentation here: https://silviomoreto.github.io/bootstrap-select -->
+    <script src="{{ url('js/bootstrap-selectpicker.js') }}"></script>
+    <!--    Plugin for Tags, full documentation here: https://xoxco.com/projects/code/tagsinput/  -->
+    <script src="{{ url('js/bootstrap-tagsinput.js') }}"></script>
+    <!--    Plugin for Fileupload, full documentation here: https://www.jasny.net/bootstrap/javascript/#fileinput -->
+    <script src="{{ url('js/jasny-bootstrap.min.js') }}"></script>
+    <!--    Plugin for Small Gallery in Product Page -->
+    <script src="{{ url('js/jquery.flexisel.js') }}"></script>
+    <!-- Plugins for presentation and navigation  -->
+    <script src="{{ url('js/modernizr.js') }}"></script>
+    <script src="{{ url('js/vertical-nav.js') }}"></script>
+    <!-- Material Kit Core initialisations of plugins and Bootstrap Material Design Library -->
+    <script src="{{ url('js/material-kit.mine8da.js?v=2.0.3') }}"></script>
+    <!-- Fixed Sidebar Nav - js With initialisations For Demo Purpose, Don't Include it in your project -->
+    <script src="{{ url('js/material-kit-demo.js') }}"></script>
+    <!-- Sharrre libray -->
+    <script src="{{ url('js/jquery.sharrre.js') }}">
+    </script>
+    
+</body>
+
+
+<!-- Mirrored from demos.creative-tim.com/material-kit-pro/examples/login-page.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 14 Jun 2018 06:30:58 GMT -->
+</html>

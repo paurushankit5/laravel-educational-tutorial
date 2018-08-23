@@ -14,7 +14,15 @@
 Route::get('/', function () {
     return view('front/index');
 });
+Route::get('/test', function () {
+    return view('front/test');
+});
 
+Route::get('/redirect', 'Auth\LoginController@redirectToProvider');
+Route::get('/callback', 'Auth\LoginController@handleProviderCallback');
+
+
+//after login
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
