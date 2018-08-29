@@ -15,7 +15,7 @@ class EditDefaultMobileValueToUsers extends Migration
     {
         Schema::table('users', function($table) {
                 $table->string('mobile')->nullable()->change();
-             });
+        });
     }
 
     /**

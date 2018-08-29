@@ -44,13 +44,13 @@
                             <div class="card-header card-header-primary text-center">
                                 <h4 class="card-title">Log in</h4>
                                 <div class="social-line">
-                                    <a href="#pablo" class="btn btn-just-icon btn-link">
+                                    <!-- <a href="#pablo" class="btn btn-just-icon btn-link">
                                         <i class="fa fa-facebook-square"></i>
                                     </a>
                                     <a href="#pablo" class="btn btn-just-icon btn-link">
                                         <i class="fa fa-twitter"></i>
-                                    </a>
-                                    <a href="#pablo" class="btn btn-just-icon btn-link">
+                                    </a> -->
+                                    <a href="{{ url('google-oauth2') }}" class="btn btn-just-icon btn-link">
                                         <i class="fa fa-google-plus"></i>
                                     </a>
                                 </div>
@@ -59,6 +59,18 @@
  -->                            <div class="card-body">
                                 <div class="input-group">
                                     {{ csrf_field() }}
+                                    @if ($errors->has('email'))
+                                        
+                                        <div class="alert alert-danger">
+                                            <div class="alert-icon">
+                                                <i class="material-icons">error_outline</i>
+                                            </div>
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                <span aria-hidden="true"><i class="material-icons">clear</i></span>
+                                            </button>
+                                            {{ $errors->first('email') }}
+                                        </div>
+                                    @endif
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">
                                             <i class="material-icons">mail</i>
