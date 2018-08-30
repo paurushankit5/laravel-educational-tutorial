@@ -34,8 +34,17 @@ Auth::routes();
 Route::group(['prefix'=>'admin','middleware' => 'AdminCheck'], function(){
 	Route::get('connect', ['as' => 'connect', 'uses' => 'AccountController@connect']);
 	Route::get('/', ['as'	 => 'adminDashboard', 'uses' => 'AdminController@index']);
+	
+	//category
 	Route::get('/category','AdminController@category')->name('adminCategory');
 	Route::post('/addcategory','AdminController@storecategory')->name('storecategory');
 	Route::post('/updatecategory','AdminController@updatecategory')->name('updatecategory');
+
+	//tags
+	Route::get('/tags','AdminController@tags')->name('adminTags');
+	Route::post('/addtags','AdminController@addtags')->name('addtags');
+	Route::post('/updatetag','AdminController@updatetag')->name('updatetag');
+
+
 });
 //Admin routes end here

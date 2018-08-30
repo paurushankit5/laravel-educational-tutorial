@@ -4,12 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Category;
+use App\Tag;
 use Session;
 class AdminController extends Controller
 {
     public function index(){
     	return view('admin/dashboard');
     }
+
+    //CATEGORY SECTION STARTS HERE
     public function category(){
     	$category = Category::all()->toArray();
     	return view('admin/category',['category' 	=> 	$category]);
@@ -78,5 +81,53 @@ class AdminController extends Controller
 		}
 		return redirect('/admin/category'); 
 	}
+
+	//TAG SECTION STARTS HERE
+	public function tags(){
+		$limit = 100;
+		$tags = Tag::where('is_deleted', 0)->orderBy('id', 'DESC')->paginate($limit);
+		return view('admin/tags',['tags'	=>	$tags,'limit' => $limit]);
+
+	}
+	public function addtags(Request $request){
+		 $data = $this->validate($request, [
+            'tag_name'=>'required',
+        ]);
+		$tag 		= 	new Tag();
+		$tag_id 	= 	$tag->savetag($request->tag_name);
+		if($tag_id === 'exists')
+		{
+			Session::flash('alert-warning', 'This tag already exists');
+		}
+		else if ($tag_id == 0){
+			Session::flash('alert-danger', 'System Failure. Please try again');
+		}
+		else{
+			Session::flash('alert-success', 'Tag added successfully');
+		}
+		//echo $tag_id;
+		return redirect('/admin/tags');
+	}
+	public function updatetag(Request $request){
+		 $data = $this->validate($request, [
+            'tag_name'=>'required',
+        ]);
+		$tag 		= 	new Tag();
+		$tag_id 	= 	$tag->updatetag($request->tag_name,$request->id);
+		if($tag_id === 'exists')
+		{
+			Session::flash('alert-warning', 'This new tag name already exists in the database');
+		}
+		else if ($tag_id == 0){
+			Session::flash('alert-danger', 'System Failure. Please try again');
+		}
+		else{
+			Session::flash('alert-success', 'Tag updated successfully');
+		}
+		//echo $tag_id;
+		return redirect('/admin/tags');
+	}
+
+
 }
 

@@ -339,6 +339,7 @@
          
         <li class="{{ Route::currentRouteNamed('adminDashboard') ? 'active' : '' }}"><a href="/admin/" ><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
         <li class="{{ Route::currentRouteNamed('adminCategory') ? 'active' : '' }}"><a href="/admin/category" ><i class="fa fa-th"></i> <span>Category</span></a></li>
+        <li class="{{ Route::currentRouteNamed('adminTags') ? 'active' : '' }}"><a href="/admin/tags" ><i class="fa fa-tag"></i> <span>Tags</span></a></li>
 
         <li class="treeview">
           <a href="#">
