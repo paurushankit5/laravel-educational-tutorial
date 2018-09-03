@@ -47,6 +47,8 @@ Route::group(['prefix'=>'admin','middleware' => 'AdminCheck'], function(){
 
 	//courses
 	Route::get('/courses','AdminController@courses')->name('adminCourses');
+	Route::get('/course/details/{id}','AdminController@coursedetails')->name('adminCourseDetails');
 	Route::post('/storecourse','AdminController@storecourse')->name('storecourse');
+	Route::post('/storesection','AdminController@storesection')->name('storesection');
 });
 //Admin routes end here

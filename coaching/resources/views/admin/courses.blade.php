@@ -129,7 +129,7 @@
                   @foreach ($courses as $course)
                     <tr>
                       <td> {{ ++$i }} </td>
-                      <td> {{ $course['course_name'] }} </td>
+                      <td> <a href="/admin/course/details/{{ $course['id'] }}">{{ $course['course_name'] }}</a> </td>
                       <td> {{ $course->category->cat_name }} </td>
                       <td> {{ \Carbon\Carbon::parse($course['updated_at'])->format('d/M/Y')}}</td>
                       <td> 

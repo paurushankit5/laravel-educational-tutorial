@@ -7,6 +7,7 @@ use App\Category;
 use App\Tag;
 use App\Course;
 use App\CourseLanguage;
+use App\Section;
 use Session;
 class AdminController extends Controller
 {
@@ -171,7 +172,38 @@ class AdminController extends Controller
 		//echo $tag_id;
 		return redirect('/admin/courses');
 	}
+	public function coursedetails(Request $request){
+		$id =  request()->segment(4);
+		
+		if(count($course  = Course::find($id)))
+		{
+			return view('admin/coursedetails',['course' => $course]);
+		}
+		else{
+			return redirect('/admin/courses');
+		}
+	}
 
+	public function storesection(Request $request){
+		//echo "<prE>";
+		if(count($request->section_name))
+		{
+			foreach ($request->section_name as $section_name) {
+				if ($section_name != '')
+				{
+					$section 	= 	new Section();
+					$section->section_name		= 		$section_name;
+					$section->course_id			= 		$request->course_id;
+					$section->save();
+				}		
+			}
+			return redirect ('/admin/course/details/'.$request->course_id);
+
+		}
+		else{
+			return redirect ('/admin/courses');
+		}
+	}
 
 
 }

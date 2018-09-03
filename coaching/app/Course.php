@@ -15,6 +15,13 @@ class Course extends Model
     	return $this->belongsTo('App\Category' ,'cat_id');
     }
 
+    public function sections(){
+    	return $this->hasMany('App\Section');
+    }
+
+    public function user(){
+    	return $this->belongsTo('App\User');
+    }
     public function savecourse($course_data){
      	//echo $data->course_name;
 
