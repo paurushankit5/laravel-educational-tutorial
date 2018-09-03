@@ -45,6 +45,8 @@ Route::group(['prefix'=>'admin','middleware' => 'AdminCheck'], function(){
 	Route::post('/addtags','AdminController@addtags')->name('addtags');
 	Route::post('/updatetag','AdminController@updatetag')->name('updatetag');
 
-
+	//courses
+	Route::get('/courses','AdminController@courses')->name('adminCourses');
+	Route::post('/storecourse','AdminController@storecourse')->name('storecourse');
 });
 //Admin routes end here

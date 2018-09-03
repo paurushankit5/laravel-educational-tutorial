@@ -11,6 +11,13 @@ class Tag extends Model
     {
         return $this->belongsTo('App\Post');
     }
+
+    public function courses()
+    {
+        return $this->belongsToMany('App\Course');
+    }
+
+
     public function savetag($tag_name){
     	$tag_slug						=	preg_replace('/[^A-Za-z0-9-]+/','-', trim(strtolower($tag_name)," "));
     	

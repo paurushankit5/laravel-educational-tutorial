@@ -25,7 +25,8 @@ class CreateCoursesTable extends Migration
             $table->integer('course_lecture_count');
             $table->string('course_video_length');
             $table->string('course_language');
-
+            $table->string('course_image');
+            $table->string('course_intro_video');
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();

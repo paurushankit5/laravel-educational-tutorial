@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Category;
 use App\Tag;
+use App\Course;
+use App\CourseLanguage;
 use Session;
 class AdminController extends Controller
 {
@@ -72,12 +74,10 @@ class AdminController extends Controller
 		$category->save();
 		if($category)
 		{
-			Session::flash('alert-success', 'Category updated Successfully');
-
+			Session::flash('alert-success', 'Category updated Successfully.');
 		}
 		else{
-			Session::flash('alert-danger', 'System Failure. Please try again');
-
+			Session::flash('alert-danger', 'System Failure. Please try again.');
 		}
 		return redirect('/admin/category'); 
 	}
@@ -85,7 +85,7 @@ class AdminController extends Controller
 	//TAG SECTION STARTS HERE
 	public function tags(){
 		$limit = 100;
-		$tags = Tag::where('is_deleted', 0)->orderBy('id', 'DESC')->paginate($limit);
+		$tags = Tag::where('is_deleted', 0)->orderBy('tag_name', 'ASC')->paginate($limit);
 		return view('admin/tags',['tags'	=>	$tags,'limit' => $limit]);
 
 	}
@@ -127,6 +127,51 @@ class AdminController extends Controller
 		//echo $tag_id;
 		return redirect('/admin/tags');
 	}
+
+
+
+
+	// COURSE SECTION STARTS HERE
+	public function courses(){
+		$limit 		= 	100;
+		$courses 	= 	Course::where('is_deleted', 0)->orderBy('id', 'ASC')->paginate($limit);
+		$lang 		= 	CourseLanguage::all();
+		$category	= 	Category::all();
+		/*echo "<pre>";
+		foreach ($courses as $course) {
+			print_r($course->category1->cat_name);
+			print_r($course->cat_id);
+			echo "<br>";
+			echo "<br>";
+			echo "<br>";
+			echo "<br>";
+		}*/
+		//print_r($courses->category());
+		//print_r($lang);
+		//exit();
+		return view('admin/courses',['courses'	=>	$courses,'limit' => $limit, 'lang' => $lang, 'category' => $category]);
+	}
+	public function storecourse(Request $request){
+		$data = $this->validate($request, [
+		    'course_name'		=>	'required',
+		    'course_overview'	=>	'required',
+		    'course_details'	=>	'required',
+		    'course_language'	=>	'required',
+		    'cat_id'			=>	'required',
+		]);
+		$course 		= 	new Course();
+		$course_id 		= 	$course->savecourse($request);
+		if($course_id)
+		{
+			Session::flash('alert-success', 'Course added succesfully.');
+		}
+		else{
+			Session::flash('alert-danger', 'System Failure. Please try again');
+		} 
+		//echo $tag_id;
+		return redirect('/admin/courses');
+	}
+
 
 
 }
