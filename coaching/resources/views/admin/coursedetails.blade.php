@@ -110,10 +110,61 @@
           <div class="box-body">
           	@if (count($course->sections))
           		<?php $i=1; ?>
+          		<?php $j=1; ?>
           		<table class="table table-responsive">          			
           		@foreach ($course->sections as $section)
           			<tr class="bg bg-primary">
-          				<td>Section {{ $i++ }}: {{ $section->section_name }}  <button class="btn btn-warning pull-right"><i class="fa fa-plus"></i> Lecture</button> </td>
+          				
+          				<td>
+          					Section {{ $i++ }}: {{ $section->section_name }}  <button class="btn btn-warning pull-right" data-toggle="collapse" data-target="#addlecture{{ $section->id }}"><i class="fa fa-plus"></i> Lecture</button> 
+          				</td>
+          			</tr>
+          			<tr>
+          				<td>
+          					<div class="row collapse" id="addlecture{{ $section->id }}">
+          						<div class="col-sm-12">
+          							<input type="button" class="btn btn-primary" value="Add Row" onclick="addRow('dataTablesection{{ $section->id }}')" />
+          							<form class="form-horizontal" method="post" action="/admin/storelecture">
+						               {{ csrf_field() }} 
+						               <input type="hidden" name="section_id" value="{{ $section['id'] }}"> 
+						               <input type="hidden" name="course_id" value="{{ $course['id'] }}"> 
+						                <table id="dataTablesection{{ $section->id }}"   class="table table-responsive table-bordered">           
+						                    <tr>
+						                        <td>
+						                            <!--<input type="checkbox"  name="chk[]"/>-->
+						                            <button  class="btn btn-danger btn-sm" onclick="delrow(this,'dataTablesection{{ $section->id }}');" type="button"><i class="fa fa-trash"></i></button>
+						                        </td>
+						                        <td>
+						                            <input required type="text" name="lecture_name[]" placeholder="Lecture Name" class="form-control"/>
+						                        </td>
+						                        <td>
+						                            <input type="url" name="video_link[]" placeholder="Youtube Link " class="form-control"/>
+						                        </td>
+						                    </tr>
+						                </table>
+						               
+						              <button type="submit" class="btn btn-primary pull-right" >Submit</button>
+
+						            </form>
+          						</div>
+          					</div>
+          				</td>
+          			</tr>
+          			<tr>
+          				@if(count($section->videolectures))
+          					<td>
+          						<ul class="list-group">
+		          					@foreach($section->videolectures as $lecture)
+		          						<li class="list-group-item">{{$j++}}.&nbsp;&nbsp;&nbsp; {{ $lecture->lecture_name }} 
+		          							@if($lecture->video_link !='' )
+		          								<span class="badge" onClick="showvideo('{{ $lecture->video_link }}');" style="cursor:pointer;">Preview Available</span>
+
+		          							@endif
+		          						</li>
+		          					@endforeach
+          						</ul>
+          					</td>
+          				@endif
           			</tr>
           		@endforeach
           		</table>
@@ -135,7 +186,7 @@
 
      
 
-    <!------------------------Edit category modal--------------------------->
+    <!------------------------Add Section modal--------------------------->
     <div id="addsectionmodal" class="modal fade" role="dialog">
       <div class="modal-dialog">
 
@@ -145,7 +196,7 @@
 
             <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h4 class="modal-title">Edit Category</h4>
+            <h4 class="modal-title">Add Section</h4>
           </div>
           <div class="modal-body">
           	<input type="button" class="btn btn-primary" value="Add Row" onclick="addRow('dataTable1')" />   
@@ -156,7 +207,7 @@
                     <tr>
                         <td>
                             <!--<input type="checkbox"  name="chk[]"/>-->
-                            <button  class="btn btn-danger btn-sm" onclick="delrow(this);" type="button"><i class="fa fa-trash"></i></button>
+                            <button  class="btn btn-danger btn-sm" onclick="delrow(this,'dataTable1');" type="button"><i class="fa fa-trash"></i></button>
                         </td>
                         <td>
                             <input required type="text" name="section_name[]" placeholder="Section Name" class="form-control"/>
@@ -176,7 +227,23 @@
       </div>
     </div>
     <!------------------------add category modal--------------------------->
-  < 
+  	 <!------------------------Video modal--------------------------->
+    <div id="videomodal" class="modal mddal-lg fade" role="dialog">
+      <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+          
+          <div class="modal-body">
+          	<iframe style="width:100%;min-height:300px;" id="iframe">
+			</iframe>
+          </div>
+           
+         </div>
+
+      </div>
+    </div>
+    <!------------------------add category modal--------------------------->
 
 
 
@@ -218,9 +285,9 @@
             }
         }
 
-        function delrow(a){
+        function delrow(a,tableid){
         	//alert("hello");
-        	var table = document.getElementById("dataTable1");
+        	var table = document.getElementById(tableid);
             var rowCount = table.rows.length;
         	//console.log(rowCount);
         	if(rowCount>1)
@@ -231,6 +298,11 @@
         	else{
         		alert('You can not remove all rows');
         	}
+        }
+        function showvideo(url)
+        {
+        	$("iframe").attr('src','');
+        	$("#videomodal").modal('toggle');
         }
   </script>
 

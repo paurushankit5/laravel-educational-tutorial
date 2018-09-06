@@ -121,7 +121,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                                 </div>
                                 <div class="col-md-5 mr-auto">
                                     <div class="social text-center">
-                                        <button class="btn btn-just-icon btn-round btn-twitter">
+                                        <!-- <button class="btn btn-just-icon btn-round btn-twitter">
                                             <i class="fa fa-twitter"></i>
                                         </button>
                                         <button class="btn btn-just-icon btn-round btn-dribbble">
@@ -129,7 +129,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                                         </button>
                                         <button class="btn btn-just-icon btn-round btn-facebook">
                                             <i class="fa fa-facebook"> </i>
-                                        </button>
+                                        </button> -->
+                                        <a href="{{ url('google-oauth2') }}" class="btn btn-just-icon btn-round"><i class="fa fa-google-plus"></i>
+                                        </a>
                                         <h4> or be classical </h4>
                                     </div>
                                     <form class="form" method="POST" action="{{ route('register') }}">

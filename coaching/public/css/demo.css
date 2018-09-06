@@ -300,3 +300,11 @@
 #javascriptComponents .btn-raised{
     margin: 10px 0px;
 }
+
+
+.breadcrumb-item{
+    font-size : 12px;
+}
+.white{
+    color:white;
+}

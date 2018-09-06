@@ -2,8 +2,8 @@
 <html lang="en">
 
 
-<!-- Mirrored from demos.creative-tim.com/material-kit-pro/ by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 14 Jun 2018 06:29:19 GMT -->
-<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+
+<meta http-equiv="content-type" content="text/html;charset=utf-8" />
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
@@ -14,166 +14,170 @@
     <title>
         Material Kit PRO by Creative Tim
     </title>
-    <!-- Extra details for Live View on GitHub Pages -->
-    <!-- Canonical SEO -->
-    <link rel="canonical" href="https://www.creative-tim.com/product/material-kit-pro" />
-    <!--  Social tags      -->
-    
+     
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
     <link rel="stylesheet" href="{{ url('css/font-awesome.min.css') }}" />
     <link rel="stylesheet" href="{{ url('css/material-kit.mine8da.css?v=2.0.3') }}">
-    <!-- Documentation extras -->
-    <!-- CSS Just for demo purpose, don't include it in your project -->
+ 
     <link href="{{ url('css/demo.css') }}" rel="stylesheet" />
     <link href="{{ url('css/vertical-nav.css') }}" rel="stylesheet" />
-    <!-- iframe removal -->
    
    
 </head>
+<body class="sections-page  section-white ">
+     @include('front.includes.header')
+     @yield('banner')
+     @yield('content')
+   
 
-<body class="index-page "> 
-    @include('front.includes.header')
-    @yield('banner')
-    @yield('content')
-    <div class="clearfix"></div>
+    
+    
     <footer class="footer footer-white footer-big">
-        <div class="container">
-            <div class="content">
-                <div class="row">
-                    <div class="col-md-2">
-                        <h5>About Us</h5>
-                        <ul class="links-vertical">
-                            <li>
-                                <a href="#pablo">
-                                    Blog
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#pablo">
-                                    About Us
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#pablo">
-                                    Presentation
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#pablo">
-                                    Contact Us
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="col-md-2">
-                        <h5>Market</h5>
-                        <ul class="links-vertical">
-                            <li>
-                                <a href="#pablo">
-                                    Sales FAQ
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#pablo">
-                                    How to Register
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#pablo">
-                                    Sell Goods
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#pablo">
-                                    Receive Payment
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#pablo">
-                                    Transactions Issues
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#pablo">
-                                    Affiliates Program
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="col-md-4">
-                        <h5>Social Feed</h5>
-                        <div class="social-feed">
-                            <div class="feed-line">
-                                <i class="fa fa-twitter"></i>
-                                <p>How to handle ethical disagreements with your clients.</p>
+                        <div class="container">
+                            <hr>
+                            <div class="content">
+                                <div class="row">
+
+                                    <div class="col-md-3">
+                                        <a href="#pablo">
+                                            <h5>Material Kit PRO</h5>
+                                        </a>
+                                        <p>Probably the best UI Kit in the world! We know you've been waiting for it, so don't be shy!</p>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <h5>About</h5>
+                                        <ul class="links-vertical">
+                                            <li>
+                                                <a href="#pablo">
+                                                    Blog
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#pablo">
+                                                    About Us
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#pablo">
+                                                    Presentation
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#pablo">
+                                                    Contact Us
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <h5>Market</h5>
+                                        <ul class="links-vertical">
+                                            <li>
+                                                <a href="#pablo">
+                                                    Sales FAQ
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#pablo">
+                                                    How to Register
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#pablo">
+                                                    Sell Goods
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#pablo">
+                                                    Receive Payment
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#pablo">
+                                                    Transactions Issues
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <h5>Legal</h5>
+                                        <ul class="links-vertical">
+                                            <li>
+                                                <a href="#pablo">
+                                                    Transactions FAQ
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#pablo">
+                                                    Terms &amp; Conditions
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#pablo">
+                                                    Licenses
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <h5>Subscribe to Newsletter</h5>
+                                        <p>
+                                            Join our newsletter and get news in your inbox every week! We hate spam too, so no worries about this.
+                                        </p>
+                                        <form class="form form-newsletter" method="" action="#">
+                                            <div class="form-group bmd-form-group">
+                                                <input type="email" class="form-control" placeholder="Your Email...">
+                                            </div>
+                                            <button type="button" class="btn btn-primary btn-just-icon" name="button">
+                                                <i class="material-icons">mail</i>
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="feed-line">
-                                <i class="fa fa-twitter"></i>
-                                <p>The tangible benefits of designing at 1x pixel density.</p>
-                            </div>
-                            <div class="feed-line">
-                                <i class="fa fa-facebook-square"></i>
-                                <p>A collection of 25 stunning sites that you can use for inspiration.</p>
+                            <hr>
+                            <ul class="social-buttons">
+                                <li>
+                                    <a href="#pablo" class="btn btn-just-icon btn-link btn-twitter">
+                                        <i class="fa fa-twitter"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#pablo" class="btn btn-just-icon btn-link btn-facebook">
+                                        <i class="fa fa-facebook-square"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#pablo" class="btn btn-just-icon btn-link btn-dribbble">
+                                        <i class="fa fa-dribbble"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#pablo" class="btn btn-just-icon btn-link btn-google">
+                                        <i class="fa fa-google-plus"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#pablo" class="btn btn-just-icon btn-link btn-youtube">
+                                        <i class="fa fa-youtube-play"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                            <div class="copyright pull-center">
+                                Copyright ©
+                                <script>
+                                    document.write(new Date().getFullYear())
+                                </script>2018 Creative Tim All Rights Reserved.
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-4">
-                        <h5>Follow Us</h5>
-                        <ul class="social-buttons">
-                            <li>
-                                <a href="#pablo" class="btn btn-just-icon btn-link btn-twitter">
-                                    <i class="fa fa-twitter"></i>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#pablo" class="btn btn-just-icon btn-link btn-facebook">
-                                    <i class="fa fa-facebook-square"></i>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#pablo" class="btn btn-just-icon btn-link btn-dribbble">
-                                    <i class="fa fa-dribbble"></i>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#pablo" class="btn btn-just-icon btn-link btn-google">
-                                    <i class="fa fa-google-plus"></i>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#pablo" class="btn btn-just-icon btn-link btn-instagram">
-                                    <i class="fa fa-instagram"></i>
-                                </a>
-                            </li>
-                        </ul>
-                        <h5>Numbers Don&apos;t Lie</h5>
-                        <h4>14.521
-                            <small>Freelancers</small>
-                        </h4>
-                        <h4>1.423.183
-                            <small>Transactions</small>
-                        </h4>
-                    </div>
-                </div>
-            </div>
-            <hr>
-            <div class="copyright pull-center">
-                Copyright &#xA9;
-                <script>
-                    document.write(new Date().getFullYear())
-                </script> Creative Tim All Rights Reserved.
-            </div>
-        </div>
-    </footer>            
-
-     
-
+                    </footer>
     <!--   Core JS Files   -->
     <script src="{{ url('js/jquery.min.js') }}"></script>
     <script src="{{ url('js/popper.min.js') }}"></script>
     <script src="{{ url('js/bootstrap-material-design.min.js') }}"></script>
     <!--  Google Maps Plugin  -->
-     <!--  Plugin for Date Time Picker and Full Calendar Plugin  -->
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB2Yno10-YTnLjjn_Vtk0V8cdcY5lC4plU"></script>
+    <!--  Plugin for Date Time Picker and Full Calendar Plugin  -->
     <script src="{{ url('js/moment.min.js') }}"></script>
     <!--    Plugin for the Datepicker, full documentation here: https://github.com/Eonasdan/bootstrap-datetimepicker -->
     <script src="{{ url('js/bootstrap-datetimepicker.min.js') }}"></script>
@@ -194,22 +198,9 @@
     <script src="{{ url('js/material-kit.mine8da.js?v=2.0.3') }}"></script>
     <!-- Fixed Sidebar Nav - js With initialisations For Demo Purpose, Don't Include it in your project -->
     <script src="{{ url('js/material-kit-demo.js') }}"></script>
-    <script>
-        $(document).ready(function() {
-
-            //init DateTimePickers
-            materialKit.initFormExtendedDatetimepickers();
-
-            // Sliders Init
-            materialKit.initSliders();
-        });
-    </script>
-    <!-- Sharrre libray -->
-    <script src="{{ url('js/jquery.sharrre.js') }}">
-    </script> 
+    
     
 </body>
 
 
-<!-- Mirrored from demos.creative-tim.com/material-kit-pro/ by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 14 Jun 2018 06:29:52 GMT -->
 </html>

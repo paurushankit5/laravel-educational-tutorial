@@ -9,7 +9,7 @@ class Section extends Model
     public function course(){
     	return $this->belongsTo('App\Course');
     }
-    public function videolecture(){
+    public function videolectures(){
     	return $this->hasMAny('App\videoLecture');
     }
 }

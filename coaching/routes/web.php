@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('front/index');
-});
+Route::get('/', 'HomeController@index');
 Route::get('/test', function () {
     return view('front/test');
 });
@@ -26,14 +24,27 @@ Route::get('/google-oauth2/response', 'Auth\LoginController@handleProviderCallba
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/userrolecheck', 'HomeController@userrolecheck')->name('userrolecheck');
+Route::get('/dashboard', 'UserController@dashboard')->name('home');
 Auth::routes();
 
+//course Frontend
+Route::get('/course/{cat_slug}/{course_slug}','CourseController@courseDetails');
 
 
-// Admin Routes starte here
+
+// Trainer Routes starts here
+Route::group(['prefix'=>'trainer','middleware' => 'TrainerCheck'], function(){
+	Route::get('/mycourses', 'TrainerController@mycourses')->name('trainercourses');
+	Route::get('/addcourse', 'TrainerController@addcourse')->name('traineraddcourse');
+	Route::post('/uploadimage', 'TrainerController@uploadimage')->name('uploadimage');
+
+});
+//Trainer routes ends here
+
+// Admin Routes starts here
 Route::group(['prefix'=>'admin','middleware' => 'AdminCheck'], function(){
-	Route::get('connect', ['as' => 'connect', 'uses' => 'AccountController@connect']);
-	Route::get('/', ['as'	 => 'adminDashboard', 'uses' => 'AdminController@index']);
+ 	Route::get('/', ['as'	 => 'adminDashboard', 'uses' => 'AdminController@index']);
 	
 	//category
 	Route::get('/category','AdminController@category')->name('adminCategory');
@@ -50,5 +61,6 @@ Route::group(['prefix'=>'admin','middleware' => 'AdminCheck'], function(){
 	Route::get('/course/details/{id}','AdminController@coursedetails')->name('adminCourseDetails');
 	Route::post('/storecourse','AdminController@storecourse')->name('storecourse');
 	Route::post('/storesection','AdminController@storesection')->name('storesection');
+	Route::post('/storelecture','AdminController@storelecture')->name('storelecture');
 });
 //Admin routes end here

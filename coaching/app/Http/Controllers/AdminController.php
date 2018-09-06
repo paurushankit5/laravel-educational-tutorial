@@ -8,6 +8,7 @@ use App\Tag;
 use App\Course;
 use App\CourseLanguage;
 use App\Section;
+use App\VideoLecture;
 use Session;
 class AdminController extends Controller
 {
@@ -195,6 +196,28 @@ class AdminController extends Controller
 					$section->section_name		= 		$section_name;
 					$section->course_id			= 		$request->course_id;
 					$section->save();
+				}		
+			}
+			return redirect ('/admin/course/details/'.$request->course_id);
+
+		}
+		else{
+			return redirect ('/admin/courses');
+		}
+	}
+	public function storelecture(Request $request){
+		
+		if(count($request->lecture_name))
+		{
+			$i=0;
+			foreach ($request->lecture_name as $lecture_name) {
+				if ($lecture_name != '')
+				{
+					$lecture 	= 	new VideoLecture();
+					$lecture->lecture_name		= 		$lecture_name;
+					$lecture->section_id		= 		$request->section_id;
+					$lecture->video_link		= 		$request->video_link[$i++];
+					$lecture->save();
 				}		
 			}
 			return redirect ('/admin/course/details/'.$request->course_id);
