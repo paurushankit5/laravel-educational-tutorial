@@ -1,14 +1,15 @@
 @extends('layouts.admin')
 @section('title')
   Course : {{ $course->course_name }}
-  <style type="text/css">
-  	td h5{
-  		padding:0px;
-  		font-size:40px;
-  	}
-  </style>
+  
 @endsection
 @section('headcontent')
+  <style type="text/css">
+    td h5{
+      padding:0px;
+      font-size:40px;
+    }
+  </style>
   <section class="content-header">
     <h1>
       Course Details
@@ -24,32 +25,19 @@
   <section class="content">
     <div class="row">
       <div class="col-md-12">
-        <!-- TO DO List -->
-        <div class="box box-primary collapse" id="addCourseDiv">
-          <div class="box-header">
-            <i class="fa fa-graduation-cap"></i>
-
-            <h3 class="box-title">Add Courses</h3>
         
-          </div>
-          <!-- /.box-header -->
-          <div class="box-body">
-                
-                          <div class="clearfix"></div>
-
-              <hr>
-           </div>
-        </div>
          <div class="box box-primary">
           <div class="box-header">
             <i class="fa fa-graduation-cap"></i>
 
             <h3 class="box-title">{{ $course->course_name }}</h3>
-
             <div class="box-tools pull-right">
-              <button class="btn btn-primary" data-toggle="collapse" data-target="#addCourseDiv"><i class="fa fa-plus"></i></button>
-            </div>
+              <a href="/course/{{ $course->category->cat_slug }}/{{ $course->course_slug }}" target="_blank" class="btn btn-primary">
+                <i class=" fa fa-eye"></i>
+              </a>
           </div>
+          </div>
+
           <!-- /.box-header -->
           <div class="box-body">            
 			<table class="table table-responsive">
@@ -57,6 +45,31 @@
 					<th> Name: </th>
 					<td> {{ $course->course_name }} </td>
 				</tr>
+        <tr>
+          <th> Category: </th>
+          <td> {{ $course->category->cat_name }} </td>
+        </tr>
+        <tr>
+          <th> Status: </th>
+          <td> 
+              @if(!$course->is_active)
+                <p class="text-danger">Disabled &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  <button class="btn btn-primary btn-sm" onClick="changeStatus(1);" title="Mark this course as active"><i class="fa fa-check"></i></button></p>
+              @else
+                <p class="text-primary">Active  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  <button class="btn btn-danger btn-sm"
+                onClick="changeStatus(0);"  title="Mark this course as disabled"><i class="fa fa-ban"></i></button></p>
+              @endif
+          </td>
+        </tr>
+        <tr>
+          <th> Tags: </th>
+          <td>
+            @if(count($course->tags))
+              @foreach($course->tags as $tag)
+                {{ $tag->tag_name }}  <br>
+              @endforeach
+            @endif
+          </td>
+        </tr>
 				<tr>
 					<th> Overview: </th>
 					<td> {{ $course->course_overview }} </td>
@@ -138,7 +151,7 @@
 						                            <input required type="text" name="lecture_name[]" placeholder="Lecture Name" class="form-control"/>
 						                        </td>
 						                        <td>
-						                            <input type="url" name="video_link[]" placeholder="Youtube Link " class="form-control"/>
+						                            <input type="text" required name="video_link[]" placeholder="Youtube Embed Link " class="form-control"/>
 						                        </td>
 						                    </tr>
 						                </table>
@@ -301,8 +314,33 @@
         }
         function showvideo(url)
         {
-        	$("iframe").attr('src','');
+        	$("iframe").attr('src',url);
         	$("#videomodal").modal('toggle');
+        }
+        function changeStatus(status){
+          var r = confirm(" Are you sure about this?");
+          if(r)
+          {
+            $.ajax({
+              type  :   "POST",
+              url   :   "/admin/changecoursestatus",
+              data  :   {
+                          "_token"      : "{{ csrf_token() }}",
+                          "is_active"   : status,
+                          "id"          : "{{ $course->id }}",
+              },
+              success : function(data){
+                if(data == 1)
+                {
+                  location.reload();
+                }
+                else{
+                  alert("We are facing some technical issues. Please try later.")
+                }
+              }
+            }); 
+          }
+          
         }
   </script>
 

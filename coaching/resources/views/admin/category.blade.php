@@ -47,10 +47,11 @@
                     <tr>
                       <td> {{ $i++ }} </td>
                       <td> <i class="{{ $cat['fa_icon'] }}"></i> {{ $cat['cat_name'] }} </td>
-                       <td>{{ $cat['cat_details'] }} </td>
+                       <td>{!! $cat['cat_details'] !!} </td>
                       <td> {{ \Carbon\Carbon::parse($cat['updated_at'])->format('d/M/Y')}}</td>
                       <td> 
-                        <button class="btn btn-warning" onClick="edit('{{ $cat['id'] }}','{{ $cat['cat_name'] }}','{{ $cat['cat_details'] }}','{{ $cat['fa_icon'] }}',);"><i class="fa fa-pencil"></i></button> 
+                        <button class="btn btn-warning" data-cat_details="{!!  $cat['cat_details'] !!}"
+                          onClick="edit(this,'{{ $cat['id'] }}','{{ $cat['cat_name'] }}','{{ $cat['fa_icon'] }}');"><i class="fa fa-pencil"></i></button> 
                         <button class="btn btn-danger"><i class="fa fa-trash"></i></button> 
                       </td>
                     </tr>
@@ -73,8 +74,8 @@
     <!-- /.content -->
 
     <!------------------------add category modal--------------------------->
-    <div id="addcatmodal" class="modal fade" role="dialog">
-      <div class="modal-dialog">
+    <div id="addcatmodal" class="modal fade " role="dialog">
+      <div class="modal-dialog modal-lg">
 
         <!-- Modal content-->
         <div class="modal-content">
@@ -119,7 +120,7 @@
 
     <!------------------------Edit category modal--------------------------->
     <div id="editcatmodal" class="modal fade" role="dialog">
-      <div class="modal-dialog">
+      <div class="modal-dialog modal-lg">
 
         <!-- Modal content-->
         <div class="modal-content">
@@ -162,17 +163,35 @@
       </div>
     </div>
     <!------------------------add category modal--------------------------->
-  <script type="text/javascript">
-    function edit(id,cat_name,cat_details,fa_icon){
-      $("#edit_id").val(id);
-      $("#edit_cat_name").val(cat_name);
-      $("#edit_cat_details").val(cat_details);
-      $("#edit_fa_icon").val(fa_icon);
-      $('#editcatmodal').modal('toggle');
-    }
-  </script>
+ 
 
 
 
  
+@endsection
+
+@section('scriptdown')
+  <script src="{{ url('admin1/bower_components/ckeditor/ckeditor.js') }}"></script>  
+  <script src="{{ url('admin1/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js') }}"></script>
+  <script>
+    $(function () {
+      // Replace the <textarea id="editor1"> with a CKEditor
+      // instance, using default configuration.
+      CKEDITOR.replace('edit_cat_details');
+      CKEDITOR.replace('cat_details');
+       //bootstrap WYSIHTML5 - text editor
+      //$('.textarea').wysihtml5()
+    })
+
+    function edit(a,id,cat_name,fa_icon){
+      var cat_details2  =   $(a).data('cat_details');
+      //alert(cat_details2);
+      $("#edit_id").val(id);
+      $("#edit_cat_name").val(cat_name);
+      CKEDITOR.instances['edit_cat_details'].setData(cat_details2)
+      //$("#edit_cat_details").val(cat_details);
+      $("#edit_fa_icon").val(fa_icon);
+      $('#editcatmodal').modal('toggle');
+    }
+  </script>
 @endsection

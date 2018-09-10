@@ -9,6 +9,7 @@ use App\Course;
 use App\CourseLanguage;
 use App\Section;
 use App\VideoLecture;
+use App\CourseTag;
 use Session;
 class AdminController extends Controller
 {
@@ -136,22 +137,11 @@ class AdminController extends Controller
 	// COURSE SECTION STARTS HERE
 	public function courses(){
 		$limit 		= 	100;
-		$courses 	= 	Course::where('is_deleted', 0)->orderBy('id', 'ASC')->paginate($limit);
+		$courses 	= 	Course::where('is_deleted', 0)->orderBy('id', 'DESC')->paginate($limit);
 		$lang 		= 	CourseLanguage::all();
 		$category	= 	Category::all();
-		/*echo "<pre>";
-		foreach ($courses as $course) {
-			print_r($course->category1->cat_name);
-			print_r($course->cat_id);
-			echo "<br>";
-			echo "<br>";
-			echo "<br>";
-			echo "<br>";
-		}*/
-		//print_r($courses->category());
-		//print_r($lang);
-		//exit();
-		return view('admin/courses',['courses'	=>	$courses,'limit' => $limit, 'lang' => $lang, 'category' => $category]);
+		$tags 		= 	Tag::orderBy('tag_name')->get();
+		return view('admin/courses',['courses'	=>	$courses,'limit' => $limit, 'lang' => $lang, 'category' => $category,'tags'	=> 	$tags]);
 	}
 	public function storecourse(Request $request){
 		$data = $this->validate($request, [
@@ -160,18 +150,35 @@ class AdminController extends Controller
 		    'course_details'	=>	'required',
 		    'course_language'	=>	'required',
 		    'cat_id'			=>	'required',
+		    'course_image' 		=>  'required | max:1000',
+
 		]);
+
 		$course 		= 	new Course();
 		$course_id 		= 	$course->savecourse($request);
 		if($course_id)
 		{
+			if(count($request->tags)){
+				$course->tags()->attach($request->tags);				
+			} 
+			$image = $request->file('course_image');
+		    $imageFileName = time() ."_".rand(1111,9999).'.' . $image->getClientOriginalExtension();
+		    //echo $imageFileName;
+		    $s3 = \Storage::disk('s3');
+		    $filePath = '/courses/' . $imageFileName;
+		    if($s3->put($filePath, file_get_contents($image), 'public')){
+		    	$course 					= 		Course::find($course_id);
+		    	$course->course_image 		= 		$imageFileName;
+		    	$course->save();
+		    }
+
 			Session::flash('alert-success', 'Course added succesfully.');
 		}
 		else{
 			Session::flash('alert-danger', 'System Failure. Please try again');
 		} 
 		//echo $tag_id;
-		return redirect('/admin/courses');
+		return redirect('/admin/course/details/'.$course_id);
 	}
 	public function coursedetails(Request $request){
 		$id =  request()->segment(4);
@@ -213,10 +220,11 @@ class AdminController extends Controller
 			foreach ($request->lecture_name as $lecture_name) {
 				if ($lecture_name != '')
 				{
-					$lecture 	= 	new VideoLecture();
+					$video_link = "https://www.youtube.com/embed/".$request->video_link[$i++]."?rel=0&vq=hd1080&iv_load_policy=3";
+ 					$lecture 	= 	new VideoLecture();
 					$lecture->lecture_name		= 		$lecture_name;
 					$lecture->section_id		= 		$request->section_id;
-					$lecture->video_link		= 		$request->video_link[$i++];
+					$lecture->video_link		= 		$video_link;
 					$lecture->save();
 				}		
 			}
@@ -226,6 +234,20 @@ class AdminController extends Controller
 		else{
 			return redirect ('/admin/courses');
 		}
+	}
+	public function changecoursestatus(Request $request){
+		if($request->id)
+		{
+			$course 				= 	Course::find($request->id);
+			$course->is_active 		= 	$request->is_active;
+			if($course->save()){
+				return 1;
+			}	
+			else{ 
+				return 0;
+			}
+		}
+		return 0;
 	}
 
 

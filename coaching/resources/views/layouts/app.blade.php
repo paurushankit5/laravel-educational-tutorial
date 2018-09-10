@@ -198,7 +198,7 @@
     <script src="{{ url('js/material-kit.mine8da.js?v=2.0.3') }}"></script>
     <!-- Fixed Sidebar Nav - js With initialisations For Demo Purpose, Don't Include it in your project -->
     <script src="{{ url('js/material-kit-demo.js') }}"></script>
-    
+    @yield('scriptdown')
     
 </body>
 

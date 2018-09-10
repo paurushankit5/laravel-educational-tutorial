@@ -29,7 +29,11 @@ Route::get('/dashboard', 'UserController@dashboard')->name('home');
 Auth::routes();
 
 //course Frontend
+Route::get('/course/{cat_slug}','CategoryController@catDetails');
 Route::get('/course/{cat_slug}/{course_slug}','CourseController@courseDetails');
+
+//tags frontend
+Route::get('/tags/{tag_slug}','TagController@tagDetails');
 
 
 
@@ -62,5 +66,6 @@ Route::group(['prefix'=>'admin','middleware' => 'AdminCheck'], function(){
 	Route::post('/storecourse','AdminController@storecourse')->name('storecourse');
 	Route::post('/storesection','AdminController@storesection')->name('storesection');
 	Route::post('/storelecture','AdminController@storelecture')->name('storelecture');
+	Route::post('/changecoursestatus','AdminController@changecoursestatus')->name('changecoursestatus');
 });
 //Admin routes end here

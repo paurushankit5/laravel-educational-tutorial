@@ -19,70 +19,20 @@ class CategoryController extends Controller
 
         return $category;
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+    public function catDetails(){
+        $cat_slug       =      request()->segment(2);
+        $where          =   array(
+                                    "cat_slug"   =>      $cat_slug,
+                                );
+        $category       =      Category::where($where)->first();
+        $array          =      array(
+                                        "category"    =>  $category
+                                    );
+        if(!count($category))
+        {
+            return redirect('/');
+        }
+        return view('front/catdetails',$array);  
     }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\category  $category
-     * @return \Illuminate\Http\Response
-     */
-    public function show(category $category)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\category  $category
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(category $category)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\category  $category
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, category $category)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\category  $category
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(category $category)
-    {
-        //
-    }
+   
 }

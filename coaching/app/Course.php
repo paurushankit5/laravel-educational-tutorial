@@ -25,7 +25,7 @@ class Course extends Model
     public function savecourse($course_data){
      	//echo $data->course_name;
 
-     	$data						=	preg_replace('/[^A-Za-z0-9-]+/','-', trim(strtolower($course_data->course_name)," "));
+     	$data						=	preg_replace('/[^A-Za-z0-9-]+/','-', trim(strtolower(preg_replace('/[^A-Za-z0-9\-]/', '', $course_data->course_name))," "));
 		$baseslug					=	$data;	
 		$check						=	array('cat_slug'		=>		$data);
 		$j=1;

@@ -17,6 +17,10 @@ class CourseController extends Controller
     	$array			 = 		array(
     									"course"	=> 	$course
     								);
-    	return view('front/coursedetails',$array);
+    	if(!count($course))
+        {
+            return redirect('/');
+        }
+        return view('front/coursedetails',$array);
     }
 }

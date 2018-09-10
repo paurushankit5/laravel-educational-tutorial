@@ -10,19 +10,21 @@
         </div>
         <div class="collapse navbar-collapse">
             <ul class="navbar-nav ml-auto">
-                <li class="dropdown nav-item">
-                    <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
-                        <i class="material-icons">apps</i> Components
-                    </a>
-                    <div class="dropdown-menu dropdown-with-icons">
-                        <a href="index-2.html" class="dropdown-item">
-                            <i class="material-icons">layers</i> All Components
+                @if(count($cat_navbar))
+                    <li class="dropdown nav-item">
+                        <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+                            <i class="material-icons">apps</i> Categories
                         </a>
-                        <a href="introduction.html" class="dropdown-item">
-                            <i class="material-icons">content_paste</i> Documentation
-                        </a>
-                    </div>
-                </li>
+                        <div class="dropdown-menu dropdown-with-icons">
+                            @foreach($cat_navbar as $c_nav)
+                                <a href="/course/{{ $c_nav->cat_slug }}" class="dropdown-item">
+                                    <i class="{{ $c_nav->fa_icon }}"></i> &nbsp;&nbsp;{{$c_nav->cat_name}}
+                                </a> 
+                            @endforeach
+                        </div>
+                    </li>
+                @endif
+                
                 <li class="dropdown nav-item">
                     <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
                         <i class="material-icons">view_day</i> Sections
@@ -99,7 +101,7 @@
                         @if (Auth::check())
                             <li class="button-container nav-item iframe-extern">
                                 <a target="_blankhref="{{ route('logout') }}"
-                                        onclick="event.preventDefault();document.getElementById('logout-form').submit();" class="btn  btn-rose btn-round btn-block">
+                                        onclick="event.preventDefault();document.getElementById('logout-form').submit();" class="btn  btn-rose btn-round btn-block" style="color:white;">
                                     <i class="fa fa-signout"></i> Logout
                                 </a>
                             </li>

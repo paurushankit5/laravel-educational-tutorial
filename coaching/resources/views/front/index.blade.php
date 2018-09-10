@@ -43,9 +43,9 @@
             @if (count($newcourses))
             <div class="container">
                 <div class="row">
-                    <div class="col-md-7">
+                    <div class="col-md-12">
                         <div class="title">
-                            <h2 class="title">Our Latest Courses {{ count($newcourses) }}</h2>                           
+                            <h2 class="title text-center">Our Latest Courses</h2>                           
                             <br>
                         </div>
                     </div>
@@ -53,18 +53,21 @@
                 <div class="row">
                     @foreach ($newcourses as $course)
                     <div class="col-md-4">
-                        <div class="card card-blog">
+                        <div class="card card-blog course-box">
                             <div class="card-header card-header-image">
                                 <a href="/course/{{ $course->category->cat_slug }}/{{ $course->course_slug }}">
-                                    <img src="{{ url('jpg/color1.jpg') }}" alt="">
+                                    <img src="{{ env('AWS_BUCKET_URL') }}/courses/{{ $course->course_image }}" alt="">
                                 </a>
                             </div>
                             <div class="card-body">
                                 <a href="/course/{{ $course->category->cat_slug }}/{{ $course->course_slug }}">
-                                    <h6 class="card-category text-warning">{{ $course->course_name }}</h6>
+                                    <h6 class="card-category text-warning">{{ $course->course_name }}  </h6>
                                 </a>
-                                <p class="card-title">
-                                    <a href="#pablo">{{ $course->course_overview }}</a>
+                                <p class="card-title course-overview text-justify">
+                                    {{ substr($course->course_overview,0,240) }}
+                                    @if(strlen($course->course_overview)>240)
+                                        ...
+                                    @endif
                                 </p>
                             </div>
                         </div>

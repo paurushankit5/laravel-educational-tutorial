@@ -24,15 +24,14 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $newcourses = Course::all(); 
-        /*if(auth()->user()->is_superuser == 1)
-        {
-            return redirect('/admin');
-        }
-        else if(auth()->user()->is_trainer == 1)
-        {
-            return redirect('/admin');
-        }*/
+        $array      =   array(
+                                "is_active"      =>  1,
+                                "is_deleted"     =>  0,
+                            );
+        $newcourses = Course::where([['is_active',1],["is_deleted" , 0]])->get(); 
+        //echo "<pre>";
+        //print_r($newcourses);
+        //echo count($newcourses);
         return view('front/index',['newcourses'    =>  $newcourses]);
     }
     public function userrolecheck(){

@@ -18,7 +18,7 @@ class CreateCourseTagTable extends Migration
            $table->integer('course_id')->unsigned();
            $table->foreign('course_id')->references('id')->on('courses');
            $table->integer('tag_id')->unsigned();
-           $table->foreign('tag_id')->references('id')->on('courses');           
+           $table->foreign('tag_id')->references('id')->on('tags');           
            $table->timestamps();
         });
 

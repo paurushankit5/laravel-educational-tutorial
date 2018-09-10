@@ -311,3 +311,12 @@
 .star-checked{
     color:#ff9800;
 }
+.card .card-header.card-header-image img{
+    height:250px;
+}
+.course-overview{
+    font-size:12px;
+ }
+ .course-box{
+   min-height: 430px;
+ }

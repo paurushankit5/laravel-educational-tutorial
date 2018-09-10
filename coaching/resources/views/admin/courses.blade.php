@@ -2,6 +2,11 @@
 @section('title')
   Courses
 @endsection
+@section('uppercss')
+    <link rel="stylesheet" href="{{ url('admin1/bower_components/bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css') }}">
+    <link rel="stylesheet" href="{{ url('admin1/bower_components/select2/dist/css/select2.min.css') }}">
+    
+@endsection
 @section('headcontent')
   <section class="content-header">
     <h1>
@@ -27,7 +32,7 @@
           </div>
           <!-- /.box-header -->
           <div class="box-body">
-               <form class="form-horizontal" name="editcategory" method="post" action="/admin/storecourse">
+               <form class="form-horizontal" name="editcategory" method="post" action="/admin/storecourse" enctype="multipart/form-data">
                {{ csrf_field() }} 
                 <div class="form-group">
                   <label class="control-label col-sm-2" for="course_name">Name*:</label>
@@ -43,6 +48,25 @@
                       @if (count($category) > 0)
                         @foreach ($category as $cat)
                           <option value="{{ $cat->id }}">{{ $cat->cat_name }}</option>
+                        @endforeach
+                      @endif
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-sm-2" for="course_image">Image*:</label>
+                  <div class="col-sm-10">
+                    <input type="file" accept="image/*" required class="form-control" name="course_image" id="course_image">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-sm-2">Tags {{ count($tags) }} </label>
+                  <div class="col-sm-10">
+                    <select class="form-control select2" required multiple="multiple" name="tags[]" data-placeholder="Select Tags"
+                            style="width: 100%;">
+                      @if (count($tags) > 0)
+                        @foreach ($tags as $ta)
+                          <option value="{{ $ta->id }}">{{ $ta->tag_name }}</option>
                         @endforeach
                       @endif
                     </select>
@@ -209,16 +233,19 @@
 @endsection
 
 @section('scriptdown')
-  <script src="{{ url('admin1/bower_components/ckeditor/ckeditor.js') }}"></script>
-  <!-- Bootstrap WYSIHTML5 -->
-  <script src="{{ url('admin1/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js') }}"></script>
+  <script src="{{ url('admin1/bower_components/ckeditor/ckeditor.js') }}"></script>  
+  <script src="{{ url('admin1/bower_components/select2/dist/js/select2.full.min.js') }}"></script>
+   <script src="{{ url('admin1/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js') }}"></script>
   <script>
     $(function () {
       // Replace the <textarea id="editor1"> with a CKEditor
       // instance, using default configuration.
-      CKEDITOR.replace('course_details')
+      CKEDITOR.replace('course_details');
+       $('.select2').select2();
       //bootstrap WYSIHTML5 - text editor
       //$('.textarea').wysihtml5()
     })
+
+
   </script>
 @endsection
