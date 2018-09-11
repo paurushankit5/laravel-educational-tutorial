@@ -110,6 +110,27 @@
                     <textarea class="form-control" name="course_requirements" id="course_requirements" placeholder="Enter Course Prerequisites"></textarea>
                   </div>
                 </div>
+                <h3 class="bg-primary text-center">SEO Section</h3>
+                <div class="form-group">
+
+                  <label class="control-label col-sm-2" for="title">Title</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" name="title" id="title" placeholder="Enter Page Title Here"/>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-sm-2" for="keyword">Keywords</label>
+                  <div class="col-sm-10">
+                    <textarea class="form-control" name="keyword" id="keyword" placeholder="Enter Meta Keywords"></textarea>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-sm-2" for="description">Description</label>
+                  <div class="col-sm-10">
+                    <textarea class="form-control" name="description" id="description" placeholder="Enter Meta Description"></textarea>
+                  </div>
+                </div>
+                
                 <button type="submit" class="btn btn-primary pull-right" >Submit</button>
 
               </form>
@@ -137,8 +158,7 @@
                   <th>Courses</th>
                   <th>Category</th>
                    <th>Last Updated</th>
-                  <th>Actions</th>
-                </tr>
+                 </tr>
               </thead>
               <tbody>
                 @if (count($courses) > 0)
@@ -156,10 +176,7 @@
                       <td> <a href="/admin/course/details/{{ $course['id'] }}">{{ $course['course_name'] }}</a> </td>
                       <td> {{ $course->category->cat_name }} </td>
                       <td> {{ \Carbon\Carbon::parse($course['updated_at'])->format('d/M/Y')}}</td>
-                      <td> 
-                        <button class="btn btn-warning" onClick="edit('{{ $course['id'] }}','{{ $course['course_name'] }}');"><i class="fa fa-pencil"></i></button> 
-                        <button class="btn btn-danger"><i class="fa fa-trash"></i></button> 
-                      </td>
+                     
                     </tr>
                   @endforeach
                   <tr>
@@ -183,49 +200,7 @@
     <!-- /.content -->
 
      
-
-    <!------------------------Edit category modal--------------------------->
-    <div id="editcatmodal" class="modal fade" role="dialog">
-      <div class="modal-dialog">
-
-        <!-- Modal content-->
-        <div class="modal-content">
-          
-
-            <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h4 class="modal-title">Edit Category</h4>
-          </div>
-          <div class="modal-body">
-            <form class="form-horizontal" name="editcategory" method="post" action="/admin/updatetag">
-               {{ csrf_field() }} 
-              <div class="form-group">
-                <label class="control-label col-sm-2" for="cat_name">Tag*:</label>
-                <div class="col-sm-10">
-                  <input type="text" class="form-control" id="edit_tag_name" name="tag_name" required placeholder="Enter Category Name">
-                  <input type="hidden" class="form-control" id="edit_id" name="id" required placeholder="Enter Category Name">
-                </div>
-              </div>
-               
-              <button type="submit" class="btn btn-primary pull-right" >Submit</button>
-
-            </form>
-            <div class="clearfix"></div>
-          </div>
-          <div class="modal-footer">
-          </div>
-         </div>
-
-      </div>
-    </div>
-    <!------------------------add category modal--------------------------->
-  <script type="text/javascript">
-    function edit(id,tag_name){
-      $("#edit_id").val(id);
-      $("#edit_tag_name").val(tag_name); 
-      $('#editcatmodal').modal('toggle');
-    }
-  </script>
+ 
 
 
 

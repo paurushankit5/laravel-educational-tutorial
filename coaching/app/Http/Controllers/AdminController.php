@@ -10,6 +10,7 @@ use App\CourseLanguage;
 use App\Section;
 use App\VideoLecture;
 use App\CourseTag;
+use App\Seo;
 use Session;
 class AdminController extends Controller
 {
@@ -19,7 +20,7 @@ class AdminController extends Controller
 
     //CATEGORY SECTION STARTS HERE
     public function category(){
-    	$category = Category::all()->toArray();
+    	$category = Category::all();
     	return view('admin/category',['category' 	=> 	$category]);
 
     }
@@ -43,10 +44,17 @@ class AdminController extends Controller
 		$category->cat_details 		= 		$request->cat_details;
 		$category->fa_icon 			= 		$request->fa_icon;
 		$category->cat_slug 		= 		$data;
-		$category->save();
-		if($category)
+		//$category->save();
+		if($category->save())
 		{
-			Session::flash('alert-success', 'Category Added Successfully');
+			$seo 		= 	new Seo();
+			if($seo->saveseo('cat_id',$category->id,$request))
+			{
+				Session::flash('alert-success', 'Category Added Successfully');
+			}
+			else{
+				Session::flash('alert-warning', 'Category Added Successfully but seo has not been added.');
+			}
 
 		}
 		else{
@@ -77,8 +85,15 @@ class AdminController extends Controller
 		$category->save();
 		if($category)
 		{
-			Session::flash('alert-success', 'Category updated Successfully.');
-		}
+			$seo 		= 	new Seo();
+			if($seo->updateseo($category->seo->id,$request))
+			{
+				Session::flash('alert-success', 'Category Updated Successfully');
+			}
+			else{
+				Session::flash('alert-warning', 'Category updated Successfully but seo has not been updated.');
+			}			
+ 		}
 		else{
 			Session::flash('alert-danger', 'System Failure. Please try again.');
 		}
@@ -171,9 +186,15 @@ class AdminController extends Controller
 		    	$course->course_image 		= 		$imageFileName;
 		    	$course->save();
 		    }
-
-			Session::flash('alert-success', 'Course added succesfully.');
-		}
+		    $seo 		= 	new Seo();
+			if($seo->saveseo('course_id',$course->id,$request))
+			{
+				Session::flash('alert-success', 'Course Added Successfully');
+			}
+			else{
+				Session::flash('alert-warning', 'Course Added Successfully but seo has not been added.');
+			}
+ 		}
 		else{
 			Session::flash('alert-danger', 'System Failure. Please try again');
 		} 

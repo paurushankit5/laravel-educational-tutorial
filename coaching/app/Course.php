@@ -22,6 +22,11 @@ class Course extends Model
     public function user(){
     	return $this->belongsTo('App\User');
     }
+
+    public function seo(){
+    	return $this->hasOne('App\Seo');
+    }
+
     public function savecourse($course_data){
      	//echo $data->course_name;
 

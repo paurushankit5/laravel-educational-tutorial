@@ -32,12 +32,13 @@
 
                     <div class="col-md-8 col-sm-12" >
                             <br>
-
+                        @if(count($course->sections) && count($course->sections[0]->videolectures))
                          <iframe src="{{ $course->sections[0]->videolectures[0]->video_link }}" id="iframe" style="width:100%;height:400px;"  allowfullscreen="allowfullscreen"
-        mozallowfullscreen="mozallowfullscreen" 
-        msallowfullscreen="msallowfullscreen" 
-        oallowfullscreen="oallowfullscreen" 
-        webkitallowfullscreen="webkitallowfullscreen" frameborder="0"></iframe>
+                            mozallowfullscreen="mozallowfullscreen" 
+                            msallowfullscreen="msallowfullscreen" 
+                            oallowfullscreen="oallowfullscreen" 
+                            webkitallowfullscreen="webkitallowfullscreen" frameborder="0"></iframe>
+                        @endif
                     </div>
                     <div class="col-md-4 col-sm-8">
                         <div class="card card-pricing card-raised bg-rose">
@@ -116,12 +117,12 @@
                                         <div class="nav-tabs-wrapper">
                                             <ul class="nav nav-tabs" data-tabs="tabs">
                                                 <li class="nav-item">
-                                                    <a class="nav-link " href="#description" data-toggle="tab">
+                                                    <a class="nav-link active " href="#description" data-toggle="tab">
                                                         <i class="material-icons">face</i> Description
                                                     </a>
                                                 </li>
                                                 <li class="nav-item ">
-                                                    <a class="nav-link active" href="#table_of_contents" data-toggle="tab">
+                                                    <a class="nav-link " href="#table_of_contents" data-toggle="tab">
                                                         <i class="material-icons">chat</i> Table Of Contents
                                                     </a>
                                                 </li>
@@ -136,10 +137,10 @@
                                 </div>
                                 <div class="card-body ">
                                     <div class="tab-content text-justify">
-                                        <div class="tab-pane " id="description">
+                                        <div class="tab-pane active " id="description">
                                             {!! $course->course_details !!}
                                         </div>
-                                        <div class="tab-pane active" id="table_of_contents">
+                                        <div class="tab-pane " id="table_of_contents">
                                              @if(count($course->sections))
                                                 <div class="table-responsive">
                                                     <table class="table">

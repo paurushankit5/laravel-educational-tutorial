@@ -50,8 +50,9 @@
                        <td>{!! $cat['cat_details'] !!} </td>
                       <td> {{ \Carbon\Carbon::parse($cat['updated_at'])->format('d/M/Y')}}</td>
                       <td> 
+
                         <button class="btn btn-warning" data-cat_details="{!!  $cat['cat_details'] !!}"
-                          onClick="edit(this,'{{ $cat['id'] }}','{{ $cat['cat_name'] }}','{{ $cat['fa_icon'] }}');"><i class="fa fa-pencil"></i></button> 
+                          onClick="edit(this,'{{ $cat['id'] }}','{{ $cat['cat_name'] }}','{{ $cat['fa_icon'] }}','{{ $cat->seo->title }}','{{ $cat->seo->keyword }}','{{ $cat->seo->description }}');"><i class="fa fa-pencil"></i></button> 
                         <button class="btn btn-danger"><i class="fa fa-trash"></i></button> 
                       </td>
                     </tr>
@@ -106,6 +107,26 @@
                   <input type="text" class="form-control" id="fa_icon" name="fa_icon" placeholder="Enter password">
                 </div>
               </div>
+              <h3 class="bg-primary text-center">SEO Section</h3>
+              <div class="form-group">
+
+                <label class="control-label col-sm-2" for="title">Title</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" name="title" id="title" placeholder="Enter Page Title Here"/>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-sm-2" for="keyword">Keywords</label>
+                <div class="col-sm-10">
+                  <textarea class="form-control" name="keyword" id="keyword" placeholder="Enter Meta Keywords"></textarea>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-sm-2" for="description">Description</label>
+                <div class="col-sm-10">
+                  <textarea class="form-control" name="description" id="description" placeholder="Enter Meta Description"></textarea>
+                </div>
+              </div>
               <button type="submit" class="btn btn-primary" >Submit</button>
 
             </form>
@@ -149,10 +170,31 @@
               <div class="form-group">
                 <label class="control-label col-sm-2" for="fa_icon">Fa Icon:</label>
                 <div class="col-sm-10"> 
-                  <input type="text" class="form-control" id="edit_fa_icon" name="fa_icon" placeholder="Enter password">
+                  <input type="text" class="form-control" id="edit_fa_icon" name="fa_icon" placeholder="Enter fa-icon">
                 </div>
               </div>
-              <button type="submit" class="btn btn-primary" >Submit</button>
+              <h3 class="bg-primary text-center">SEO Section</h3>
+              <div class="form-group">
+
+                <label class="control-label col-sm-2" for="title">Title</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" name="title" id="edit_title" placeholder="Enter Page Title Here"/>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-sm-2" for="keyword">Keywords</label>
+                <div class="col-sm-10">
+                  <textarea class="form-control" name="keyword" id="edit_keyword" placeholder="Enter Meta Keywords"></textarea>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-sm-2" for="description">Description</label>
+                <div class="col-sm-10">
+                  <textarea class="form-control" name="description" id="edit_description" placeholder="Enter Meta Description"></textarea>
+                </div>
+              </div>
+              <br>
+              <button type="submit" class="btn btn-primary pull-right" >Submit</button>
 
             </form>
           </div>
@@ -183,14 +225,17 @@
       //$('.textarea').wysihtml5()
     })
 
-    function edit(a,id,cat_name,fa_icon){
+    function edit(a,id,cat_name,fa_icon,title,keyword,description){
       var cat_details2  =   $(a).data('cat_details');
-      //alert(cat_details2);
+      alert(title);
       $("#edit_id").val(id);
       $("#edit_cat_name").val(cat_name);
       CKEDITOR.instances['edit_cat_details'].setData(cat_details2)
       //$("#edit_cat_details").val(cat_details);
       $("#edit_fa_icon").val(fa_icon);
+      $("#edit_title").val(title);
+      $("#edit_keyword").val(keyword);
+      $("#edit_description").val(description);
       $('#editcatmodal').modal('toggle');
     }
   </script>
