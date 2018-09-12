@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Course;
-use App\SEO;
+use App\Seo;
 class HomeController extends Controller
 {
     /**
