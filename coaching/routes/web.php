@@ -66,6 +66,13 @@ Route::group(['prefix'=>'admin','middleware' => 'AdminCheck'], function(){
 	Route::post('/storecourse','AdminController@storecourse')->name('storecourse');
 	Route::post('/storesection','AdminController@storesection')->name('storesection');
 	Route::post('/storelecture','AdminController@storelecture')->name('storelecture');
-	Route::post('/changecoursestatus','AdminController@changecoursestatus')->name('changecoursestatus');
+	Route::post('/changecoursestatus','AdminController@seo')->name('changecoursestatus');
+
+
+	//seo
+	Route::get('/seo','AdminController@seo')->name('adminSeo');
+	Route::post('/saveseo','AdminController@saveseo')->name('adminSaveseo');
+	Route::post('/updateseo','AdminController@updateseo')->name('adminUpdateseo');
+
 });
 //Admin routes end here

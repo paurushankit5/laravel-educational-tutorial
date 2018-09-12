@@ -1,4 +1,4 @@
-@extends('layouts.app')
+\@extends('layouts.app')
 @section('banner')
     <div class="page-header header-filter header-small" data-parallax="true" style="background-image: url(' {{ url('jpg/cat3.jpg')  }} ');">
         <div class="container">
@@ -18,8 +18,7 @@
 @endsection
 @section('content')
 <div class="main">
-    <div class="section-space"></div>
-        <div class="section section-basic">
+         <div class="section section-basic">
             @if (count($tag->courses))
             <div class="container">
                 <div class="row">

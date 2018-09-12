@@ -12,7 +12,7 @@
     <link rel="apple-touch-icon" href="png/apple-icon.png">
     <link rel="icon" href="png/favicon.png">
     <title>
-        Login &#45; Material Kit PRO by Creative Tim
+        Login Area
     </title>
     <!-- Extra details for Live View on GitHub Pages -->
     <!-- Canonical SEO -->

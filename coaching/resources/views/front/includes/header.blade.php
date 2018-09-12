@@ -24,7 +24,21 @@
                         </div>
                     </li>
                 @endif
-                
+                <li class="nav-item">
+                  <a href="#" class=" nav-link" >
+                        <i class="material-icons">list</i> Blogs
+                    </a>  
+                </li>
+                <li class="nav-item">
+                  <a href="#" class=" nav-link" >
+                        <i class="material-icons">account_balance</i> About Us
+                    </a>  
+                </li>
+                <li class="nav-item">
+                  <a href="#" class=" nav-link" >
+                        <i class="material-icons">call</i> Contact Us
+                    </a>  
+                </li>
                 <li class="dropdown nav-item">
                     <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
                         <i class="material-icons">view_day</i> Sections

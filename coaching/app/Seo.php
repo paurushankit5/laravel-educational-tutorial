@@ -37,15 +37,22 @@ class Seo extends Model
 		}
     } 
     public function updateseo($id,$data){
-    	$seo 			= 	 	$this->find($id); 
-		$seo->title  		 = 	$data->title;
-		$seo->keyword  	 =  $data->keyword;
+    	$seo 				= 	$this->find($id); 
+		$seo->title  		= 	$data->title;
+		$seo->keyword  	 	=   $data->keyword;
 		$seo->description   = 	$data->description;
+		if(isset($data->page_name))
+		{
+			$seo->page_name 	= 	$data->page_name;
+		}
 		if($seo->save()){
 				return 1;
 		}
 		else{
 			return 0;
 		}
+    }
+    public function getseo($field_name,$field_value){
+    	return $this->where($field_name,$field_value)->first();
     }
 }

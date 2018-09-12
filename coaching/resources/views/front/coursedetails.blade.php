@@ -1,5 +1,15 @@
 @extends('layouts.app')
+@section('seo')
+    @if(isset($course->seo_title))
+    <title>{{ $course->seo->title }}</title>
+    <meta name="keywords" content="{{ $course->seo->keyword }}">
+    <meta name="description" content="{{ $course->seo->description }}">
 
+    @else
+    <title>{{ $course->category->cat_name }} - {{ $course->course_name }} </title>
+    @endif
+
+@endsection
 @section('content')
     <div class="page-header header-filter header-small" data-parallax="true" style="background-image: url(' {{ url('jpg/course1.jpg')  }} ');">
         <div class="container">
@@ -38,6 +48,8 @@
                             msallowfullscreen="msallowfullscreen" 
                             oallowfullscreen="oallowfullscreen" 
                             webkitallowfullscreen="webkitallowfullscreen" frameborder="0"></iframe>
+                        @else
+                            <h2 class="text text-center text-warning">Tutorials not available yet. </h2>
                         @endif
                     </div>
                     <div class="col-md-4 col-sm-8">
@@ -104,7 +116,7 @@
                          @if(count($course->tags))
                             <center>
                             @foreach($course->tags as $tag)
-                                <a href="/tags/{{ $tag->tag_slug }}" target="_blank" class="btn btn-warning"> {{ $tag->tag_name }} </a>
+                                <a href="/tags/{{ $tag->tag_slug }}" class="btn btn-warning btn-sm"> {{ $tag->tag_name }} </a>
                             @endforeach
                             </center>
                          @endif

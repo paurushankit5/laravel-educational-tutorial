@@ -29,6 +29,15 @@ class AdminController extends Controller
         $data = $this->validate($request, [
             'cat_name'=>'required',
         ]); 
+        $image = $request->file('cat_image');
+	    $imageFileName = time() ."_".rand(1111,9999).'.' . $image->getClientOriginalExtension();
+		    $s3 = \Storage::disk('s3');
+	    $filePath = '/category/' . $imageFileName;
+	    if(!$s3->put($filePath, file_get_contents($image), 'public')){
+	    	Session::flash('alert-danger', 'System Failure. Please try again');
+	    	return redirect('admin/category');
+
+	    }
  		$data						=	preg_replace('/[^A-Za-z0-9-]+/','-', trim(strtolower($request->cat_name)," "));
 		$baseslug					=	$data;	
 		$check						=	array('cat_slug'		=>		$data);
@@ -44,9 +53,22 @@ class AdminController extends Controller
 		$category->cat_details 		= 		$request->cat_details;
 		$category->fa_icon 			= 		$request->fa_icon;
 		$category->cat_slug 		= 		$data;
-		//$category->save();
+		$category->cat_image 		= 		$imageFileName;
+
 		if($category->save())
 		{
+			$image = $request->file('cat_image');
+		    $imageFileName = time() ."_".rand(1111,9999).'.' . $image->getClientOriginalExtension();
+ 		    $s3 = \Storage::disk('s3');
+		    $filePath = '/category/' . $imageFileName;
+		    if($s3->put($filePath, file_get_contents($image), 'public')){
+		    	$course 					= 		Category::find($category->id);
+		    	$course->cat_image 		= 		$imageFileName;
+		    	$course->save();
+		    }
+
+
+
 			$seo 		= 	new Seo();
 			if($seo->saveseo('cat_id',$category->id,$request))
 			{
@@ -270,6 +292,45 @@ class AdminController extends Controller
 		}
 		return 0;
 	}
+
+
+
+
+	//SEO SECTION STARTS HERE
+	public function seo()
+	{
+ 		$page_seo 	= 	Seo::where('page_name','<>',Null)->orderBy('id','DESC')->get();
+ 		//echo "<pre>";
+ 		//print_r($page_seo);
+ 		return view('admin/seo',['seo'	=> 	$page_seo]);
+ 	}
+ 	public function saveseo(Request $request){
+ 		$data = $this->validate($request, [
+            'page_name'=>'required',
+            'title'=>'required',
+        ]);
+        $seo 		= 	new Seo();
+		if($seo->saveseo('page_name',$request->page_name,$request))
+		{
+			Session::flash('alert-success', 'SEO Added Successfully');
+		}
+		else{
+			Session::flash('alert-warning', 'We are facing some technical issue. Please try after some time.');
+		}
+		return redirect('/admin/seo');
+ 	}
+ 	public function updateseo(Request $request){
+ 		$seo 		= 	new Seo();
+		if($seo->updateseo($request->id,$request))
+		{
+			Session::flash('alert-success', 'SEO Updated Successfully');
+		}
+		else{
+			Session::flash('alert-warning', 'We are facing some technical issue. Please try after some time.');
+		}
+		return redirect('/admin/seo');
+
+ 	}
 
 
 }

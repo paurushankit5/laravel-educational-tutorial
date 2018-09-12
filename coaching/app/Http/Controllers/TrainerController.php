@@ -23,7 +23,7 @@ class TrainerController extends Controller
 	    $imageFileName = time() . '.' . $image->getClientOriginalExtension();
 	    echo $imageFileName;
 	    $s3 = \Storage::disk('s3');
-	    $filePath = '/courses/' . $imageFileName;
+	    $filePath = '/category/' . $imageFileName;
 	    $s3->put($filePath, file_get_contents($image), 'public');
 	    //$disk-&gt;put($targetFile, fopen($sourceFile, 'r+'));
 

@@ -35,7 +35,7 @@
                 <tr>
                   <th>#</th>
                   <th>Category</th>
-                  <th>Details</th>
+                  <th>Image</th>
                   <th>Last Updated</th>
                   <th>Actions</th>
                 </tr>
@@ -47,7 +47,7 @@
                     <tr>
                       <td> {{ $i++ }} </td>
                       <td> <i class="{{ $cat['fa_icon'] }}"></i> {{ $cat['cat_name'] }} </td>
-                       <td>{!! $cat['cat_details'] !!} </td>
+                       <td><img src="{{ env('AWS_BUCKET_URL') }}/category/{{ $cat->cat_image }}" class="img img-responsive thumbnail1" alt="{{ $cat->vcat_name }}"/> </td>
                       <td> {{ \Carbon\Carbon::parse($cat['updated_at'])->format('d/M/Y')}}</td>
                       <td> 
 
@@ -87,7 +87,7 @@
             <h4 class="modal-title">Add Category</h4>
           </div>
           <div class="modal-body">
-            <form class="form-horizontal" method="post" action="/admin/addcategory">
+            <form class="form-horizontal" method="post" action="/admin/addcategory" enctype="multipart/form-data">
                {{ csrf_field() }} 
               <div class="form-group">
                 <label class="control-label col-sm-2" for="cat_name">Category*:</label>
@@ -104,7 +104,13 @@
               <div class="form-group">
                 <label class="control-label col-sm-2" for="fa_icon">Fa Icon:</label>
                 <div class="col-sm-10"> 
-                  <input type="text" class="form-control" id="fa_icon" name="fa_icon" placeholder="Enter password">
+                  <input type="text" class="form-control" id="fa_icon" name="fa_icon" placeholder="Enter dont-awesome icons here">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-sm-2" for="cat_image">Image:</label>
+                <div class="col-sm-10"> 
+                  <input type="file" class="form-control" id="cat_image" name="cat_image" placeholder="Enter password">
                 </div>
               </div>
               <h3 class="bg-primary text-center">SEO Section</h3>
@@ -227,7 +233,7 @@
 
     function edit(a,id,cat_name,fa_icon,title,keyword,description){
       var cat_details2  =   $(a).data('cat_details');
-      alert(title);
+      //alert(title);
       $("#edit_id").val(id);
       $("#edit_cat_name").val(cat_name);
       CKEDITOR.instances['edit_cat_details'].setData(cat_details2)

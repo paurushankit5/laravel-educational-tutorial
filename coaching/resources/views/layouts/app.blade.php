@@ -10,17 +10,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <!-- Favicons -->
     <link rel="apple-touch-icon" href="png/apple-icon.png">
-    <link rel="icon" href="png/favicon.png">
-    <title>
-        Material Kit PRO by Creative Tim
-    </title>
+    <link rel="icon" href="{{ asset('png/favicon.png') }}">
+    @yield('seo')
      
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
-    <link rel="stylesheet" href="{{ url('css/font-awesome.min.css') }}" />
-    <link rel="stylesheet" href="{{ url('css/material-kit.mine8da.css?v=2.0.3') }}">
+    <link rel="stylesheet" href="{{ asset('css/font-awesome.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/material-kit.mine8da.css?v=2.0.3') }}">
  
-    <link href="{{ url('css/demo.css') }}" rel="stylesheet" />
-    <link href="{{ url('css/vertical-nav.css') }}" rel="stylesheet" />
+    <link href="{{ asset('css/demo.css') }}" rel="stylesheet" />
+    <link href="{{ asset('css/vertical-nav.css') }}" rel="stylesheet" />
    
    
 </head>
@@ -69,56 +67,22 @@
                                             </li>
                                         </ul>
                                     </div>
-                                    <div class="col-md-2">
-                                        <h5>Market</h5>
+                                    <div class="col-md-4">
+                                        <h5>Our Categories</h5>
                                         <ul class="links-vertical">
-                                            <li>
-                                                <a href="#pablo">
-                                                    Sales FAQ
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#pablo">
-                                                    How to Register
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#pablo">
-                                                    Sell Goods
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#pablo">
-                                                    Receive Payment
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#pablo">
-                                                    Transactions Issues
-                                                </a>
-                                            </li>
+                                            @if(count($cat_navbar))                                                 
+                                                @foreach($cat_navbar as $c_nav)
+                                                    <li>
+                                                        <a href="/course/{{ $c_nav->cat_name }} ">
+                                                            {{ $c_nav->cat_name }}
+                                                        </a>
+                                                    </li>
+                                                @endforeach
+                                            @endif
+                                            
                                         </ul>
                                     </div>
-                                    <div class="col-md-2">
-                                        <h5>Legal</h5>
-                                        <ul class="links-vertical">
-                                            <li>
-                                                <a href="#pablo">
-                                                    Transactions FAQ
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#pablo">
-                                                    Terms &amp; Conditions
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#pablo">
-                                                    Licenses
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
+                                     
                                     <div class="col-md-3">
                                         <h5>Subscribe to Newsletter</h5>
                                         <p>
@@ -172,32 +136,32 @@
                         </div>
                     </footer>
     <!--   Core JS Files   -->
-    <script src="{{ url('js/jquery.min.js') }}"></script>
-    <script src="{{ url('js/popper.min.js') }}"></script>
-    <script src="{{ url('js/bootstrap-material-design.min.js') }}"></script>
+    <script src="{{ asset('js/jquery.min.js') }}"></script>
+    <script src="{{ asset('js/popper.min.js') }}"></script>
+    <script src="{{ asset('js/bootstrap-material-design.min.js') }}"></script>
     <!--  Google Maps Plugin  -->
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB2Yno10-YTnLjjn_Vtk0V8cdcY5lC4plU"></script>
     <!--  Plugin for Date Time Picker and Full Calendar Plugin  -->
-    <script src="{{ url('js/moment.min.js') }}"></script>
+    <script src="{{ asset('js/moment.min.js') }}"></script>
     <!--    Plugin for the Datepicker, full documentation here: https://github.com/Eonasdan/bootstrap-datetimepicker -->
-    <script src="{{ url('js/bootstrap-datetimepicker.min.js') }}"></script>
+    <script src="{{ asset('js/bootstrap-datetimepicker.min.js') }}"></script>
     <!--    Plugin for the Sliders, full documentation here: https://refreshless.com/nouislider/ -->
-    <script src="{{ url('js/nouislider.min.js') }}"></script>
+    <script src="{{ asset('js/nouislider.min.js') }}"></script>
     <!--    Plugin for Select, full documentation here: https://silviomoreto.github.io/bootstrap-select -->
-    <script src="{{ url('js/bootstrap-selectpicker.js') }}"></script>
+    <script src="{{ asset('js/bootstrap-selectpicker.js') }}"></script>
     <!--    Plugin for Tags, full documentation here: https://xoxco.com/projects/code/tagsinput/  -->
-    <script src="{{ url('js/bootstrap-tagsinput.js') }}"></script>
+    <script src="{{ asset('js/bootstrap-tagsinput.js') }}"></script>
     <!--    Plugin for Fileupload, full documentation here: https://www.jasny.net/bootstrap/javascript/#fileinput -->
-    <script src="{{ url('js/jasny-bootstrap.min.js') }}"></script>
+    <script src="{{ asset('js/jasny-bootstrap.min.js') }}"></script>
     <!--    Plugin for Small Gallery in Product Page -->
-    <script src="{{ url('js/jquery.flexisel.js') }}"></script>
+    <script src="{{ asset('js/jquery.flexisel.js') }}"></script>
     <!-- Plugins for presentation and navigation  -->
-    <script src="{{ url('js/modernizr.js') }}"></script>
-    <script src="{{ url('js/vertical-nav.js') }}"></script>
+    <script src="{{ asset('js/modernizr.js') }}"></script>
+    <script src="{{ asset('js/vertical-nav.js') }}"></script>
     <!-- Material Kit Core initialisations of plugins and Bootstrap Material Design Library -->
-    <script src="{{ url('js/material-kit.mine8da.js?v=2.0.3') }}"></script>
+    <script src="{{ asset('js/material-kit.mine8da.js?v=2.0.3') }}"></script>
     <!-- Fixed Sidebar Nav - js With initialisations For Demo Purpose, Don't Include it in your project -->
-    <script src="{{ url('js/material-kit-demo.js') }}"></script>
+    <script src="{{ asset('js/material-kit-demo.js') }}"></script>
     @yield('scriptdown')
     
 </body>

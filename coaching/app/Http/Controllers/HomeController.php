@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Course;
+use App\SEO;
 class HomeController extends Controller
 {
     /**
@@ -29,10 +30,12 @@ class HomeController extends Controller
                                 "is_deleted"     =>  0,
                             );
         $newcourses = Course::where([['is_active',1],["is_deleted" , 0]])->get(); 
+        $seo        =  new Seo;
+        $page_seo   =   $seo->getseo("page_name","homepage");
         //echo "<pre>";
-        //print_r($newcourses);
-        //echo count($newcourses);
-        return view('front/index',['newcourses'    =>  $newcourses]);
+        //print_r($page_seo);
+        //echo count($page_seo);
+        return view('front/index',['newcourses'    =>  $newcourses,'seo' => $page_seo]);
     }
     public function userrolecheck(){
         if (Auth::check() && Auth::user()->is_superuser)
