@@ -17,4 +17,7 @@
     # Handle Authorization Header
     RewriteCond %{HTTP:Authorization} .
     RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+    RewriteCond %{HTTP_HOST} ^mycoursera.in [NC]
+    RewriteRule ^(.*)$ http://www.mycoursera.in/$1 [L,R=301,NC]
 </IfModule>
