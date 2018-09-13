@@ -24,6 +24,14 @@
 @endsection
 @section('content')
 <div class="main">
+    <nav aria-label="breadcrumb" role="navigation">
+      <ol class="breadcrumb pull-right">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        
+        <li class="breadcrumb-item active" aria-current="page">{{ $category->cat_name }}</li>
+      </ol>
+    </nav>
+    <div class="clearfix"></div>
         <div class="section section-basic">
             @if (count($category->courses))
             <div class="container">

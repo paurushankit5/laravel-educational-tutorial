@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use App\Course;
 use App\Seo;
 class HomeController extends Controller
@@ -37,10 +38,22 @@ class HomeController extends Controller
         //echo count($page_seo);
         return view('front/index',['newcourses'    =>  $newcourses,'seo' => $page_seo]);
     }
+    public function test2()
+    {
+        echo bcrypt('21feb1993');
+        echo "<br>";
+        echo Hash::make('21feb1993');
+        echo "<br>";
+        echo '$2y$10$ptERu7RCQlOhjMVgfGm8f.hBhPDzE3B0Q8cYSpOOx6/kDCb7S6S46';
+    }
     public function userrolecheck(){
         if (Auth::check() && Auth::user()->is_superuser)
         {
             return redirect ('/admin');
+        }
+        else if (Auth::check() && Auth::user()->password==Null)
+        {
+            return redirect ('/dashboard');
         }
         else if (Auth::check() && Auth::user()->is_trainer)
         {

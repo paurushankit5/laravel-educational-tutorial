@@ -35,6 +35,7 @@
             <li class="breadcrumb-item active" aria-current="page">{{ $course->course_name }}</li>
           </ol>
         </nav>
+        <div class="clearfix"></div>
         <div class="section">
 
             <div class="container" id="iframe_parent">

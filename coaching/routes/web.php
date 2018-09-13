@@ -12,6 +12,7 @@
 */
 
 Route::get('/', 'HomeController@index');
+Route::get('/test2', 'HomeController@test2');
 Route::get('/test', function () {
     return view('front/test');
 });
