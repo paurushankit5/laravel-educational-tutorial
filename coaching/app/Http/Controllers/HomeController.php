@@ -30,7 +30,7 @@ class HomeController extends Controller
                                 "is_active"      =>  1,
                                 "is_deleted"     =>  0,
                             );
-        $newcourses = Course::where([['is_active',1],["is_deleted" , 0]])->get(); 
+        $newcourses = Course::where('home_page_course','<>','0')->orderBy('home_page_course','ASC')->get();
         $seo        =  new Seo;
         $page_seo   =   $seo->getseo("page_name","homepage");
         //echo "<pre>";

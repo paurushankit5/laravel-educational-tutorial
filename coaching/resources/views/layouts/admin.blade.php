@@ -336,22 +336,17 @@
         <li class="{{ Route::currentRouteNamed('adminDashboard') ? 'active' : '' }}"><a href="/admin/" ><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
         <li class="{{ Route::currentRouteNamed('adminCategory') ? 'active' : '' }}"><a href="/admin/category" ><i class="fa fa-th"></i> <span>Category</span></a></li>
         <li class="{{ Route::currentRouteNamed('adminTags') ? 'active' : '' }}"><a href="/admin/tags" ><i class="fa fa-tag"></i> <span>Tags</span></a></li>
-        <li class="{{ Route::currentRouteNamed('adminCourses') || Route::currentRouteNamed('adminCourseDetails') ? 'active' : '' }}"><a href="/admin/courses" ><i class="fa fa-graduation-cap"></i> <span>Courses</span></a></li>
-        <li class="{{ Route::currentRouteNamed('adminSeo') ? 'active' : '' }}"><a href="/admin/seo" ><i class="fa fa-industry"></i> <span>Page Seo</span></a></li>
+         <li class="{{ Route::currentRouteNamed('adminSeo') ? 'active' : '' }}"><a href="/admin/seo" ><i class="fa  fa-files-o"></i> <span>Page Seo</span></a></li>
 
-        <li class="treeview">
+        <li class="treeview {{ Route::currentRouteNamed('adminCourses') || Route::currentRouteNamed('adminCourseDetails') ? 'active' : '' }}">
           <a href="#">
-            <i class="fa fa-files-o"></i>
-            <span>Layout Options</span>
-            <span class="pull-right-container">
-              <span class="label label-primary pull-right">4</span>
-            </span>
+            <i class="fa fa-graduation-cap"></i>
+            <span>Courses</span>
+            
           </a>
           <ul class="treeview-menu">
-            <li><a href="pages/layout/top-nav.html"><i class="fa fa-circle-o"></i> Top Navigation</a></li>
-            <li><a href="pages/layout/boxed.html"><i class="fa fa-circle-o"></i> Boxed</a></li>
-            <li><a href="pages/layout/fixed.html"><i class="fa fa-circle-o"></i> Fixed</a></li>
-            <li><a href="pages/layout/collapsed-sidebar.html"><i class="fa fa-circle-o"></i> Collapsed Sidebar</a></li>
+            <li class="{{ Route::currentRouteNamed('adminCourses') || Route::currentRouteNamed('adminCourseDetails') ? 'active' : '' }}"><a href="/admin/courses"><i class="fa fa-circle-o"></i> All Courses</a></li>
+            <li><a href="/admin/HomePageCourse"><i class="fa fa-circle-o"></i> Home Page Courses</a></li> 
           </ul>
         </li>
         <li>

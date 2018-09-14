@@ -1,4 +1,4 @@
-\@extends('layouts.app')
+@extends('layouts.app')
 @section('banner')
     <div class="page-header header-filter header-small" data-parallax="true" style="background-image: url(' {{ url('jpg/cat3.jpg')  }} ');">
         <div class="container">
@@ -9,7 +9,9 @@
                         <br>
                         <br>
                         <h2 class="title">{{ $tag->tag_name }}</h2>
-                         <br> 
+                        <div class="col-md-12 share-div">
+                            <div class="sharethis-inline-share-buttons "></div>
+                        </div> 
                     </div>
                 </div>
             </div>

@@ -51,23 +51,34 @@ Route::group(['prefix'=>'trainer','middleware' => 'TrainerCheck'], function(){
 Route::group(['prefix'=>'admin','middleware' => 'AdminCheck'], function(){
  	Route::get('/', ['as'	 => 'adminDashboard', 'uses' => 'AdminController@index']);
 	
+
+	
 	//category
 	Route::get('/category','AdminController@category')->name('adminCategory');
 	Route::post('/addcategory','AdminController@storecategory')->name('storecategory');
 	Route::post('/updatecategory','AdminController@updatecategory')->name('updatecategory');
+
+
 
 	//tags
 	Route::get('/tags','AdminController@tags')->name('adminTags');
 	Route::post('/addtags','AdminController@addtags')->name('addtags');
 	Route::post('/updatetag','AdminController@updatetag')->name('updatetag');
 
+
+
 	//courses
 	Route::get('/courses','AdminController@courses')->name('adminCourses');
 	Route::get('/course/details/{id}','AdminController@coursedetails')->name('adminCourseDetails');
+	Route::get('/HomePageCourse','AdminController@homepagecourse')->name('adminhomepagecourse');
 	Route::post('/storecourse','AdminController@storecourse')->name('storecourse');
 	Route::post('/storesection','AdminController@storesection')->name('storesection');
 	Route::post('/storelecture','AdminController@storelecture')->name('storelecture');
 	Route::post('/changecoursestatus','AdminController@seo')->name('changecoursestatus');
+	Route::post('/sethomepagecourse','AdminController@sethomepagecourse')->name('sethomepagecourse');
+	Route::post('/updatehomepagecourse','AdminController@updatehomepagecourse')->name('updatehomepagecourse');
+	Route::post('/removehomepagecourse','AdminController@removehomepagecourse')->name('removehomepagecourse');
+
 
 
 	//seo

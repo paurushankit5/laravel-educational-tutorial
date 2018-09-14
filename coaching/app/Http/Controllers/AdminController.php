@@ -292,6 +292,51 @@ class AdminController extends Controller
 		}
 		return 0;
 	}
+	public function homepagecourse(){
+		$courses 			= 	Course::where(['is_deleted'=> 0 ,'is_active' => 1,'home_page_course'=>0])->get();
+		$home_page_course 	= 	Course::where('home_page_course','<>','0')->orderBy('home_page_course','ASC')->get();
+		return view('admin/homepagecourse',['courses'	=> $courses,'home_page_course'	=> 	$home_page_course]);
+	}
+
+	public function sethomepagecourse(Request $request){
+		
+		$start =  Course::where('home_page_course','<>','0')->count();
+		if(count($request->home_page_course))
+		{
+			foreach ($request->home_page_course as $id) {
+				//echo ++$start."<br>";
+				$course 	= 	Course::find($id);
+				$course->home_page_course = ++$start;
+				$course->save();
+			}
+		}
+		return back();
+	}
+	public function updatehomepagecourse(Request $request)
+	{
+		//echo "<pre>";
+		if(count($request->data1)){
+			foreach ($request->data1 as $key => $id) {
+				$course 	= 	Course::find($id);
+				$course->home_page_course = ++$key;
+				$course->save();
+			}
+		}
+		return 1;
+	}
+	public function removehomepagecourse(Request $request){
+		$course 	= 	Course::find($request->id);
+		$course->home_page_course = 0;
+		$course->save();
+		return 1;
+	}
+
+
+
+
+
+
+
 
 
 

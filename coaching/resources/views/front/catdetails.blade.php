@@ -15,7 +15,9 @@
                         <br>
                         <br>
                         <h2 class="title">{{ $category->cat_name }}</h2>
-                         <br> 
+                         <div class="col-md-12 share-div">
+                            <div class="sharethis-inline-share-buttons "></div>
+                        </div>
                     </div>
                 </div>
             </div>
