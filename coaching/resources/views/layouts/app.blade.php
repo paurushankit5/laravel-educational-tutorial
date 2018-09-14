@@ -9,7 +9,9 @@
     <link rel="apple-touch-icon" href="png/apple-icon.png">
     <link rel="icon" href="{{ asset('png/favicon.png') }}">
     @yield('seo')
-     
+    <!--------------------------------------Share buttons-------------------->
+    <script src="//platform-api.sharethis.com/js/sharethis.js#property=5b9b51e6bae54e00110a7f8d&product=inline-share-buttons"></script>
+    <!--------------------------------------Share buttons-------------------->
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
     <link rel="stylesheet" href="{{ asset('css/font-awesome.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/material-kit.mine8da.css?v=2.0.3') }}">

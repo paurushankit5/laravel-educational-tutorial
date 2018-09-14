@@ -52,6 +52,8 @@
                         @else
                             <h2 class="text text-center text-warning">Tutorials not available yet. </h2>
                         @endif
+                        <div class="sharethis-inline-share-buttons"></div>
+
                     </div>
                     <div class="col-md-4 col-sm-8">
                         <div class="card card-pricing card-raised bg-rose">
