@@ -12,5 +12,8 @@ class category extends Model
      public function seo(){
     	return $this->hasOne('App\Seo','cat_id');
     }
+    public function subcategories(){
+    	return $this->hasMAny('App\SubCategory','cat_id');
+    }
 
 }

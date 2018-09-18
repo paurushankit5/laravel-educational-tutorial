@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddCatIdToCourses extends Migration
+class AddSubcatIdToSeos extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class AddCatIdToCourses extends Migration
      */
     public function up()
     {
-        Schema::table('courses', function($table) {
+        Schema::table('seos', function($table) {
             $table->integer('subcat_id')->unsigned()->nullable();
             $table->foreign('subcat_id')->references('id')->on('sub_categories');
         });
@@ -26,7 +26,7 @@ class AddCatIdToCourses extends Migration
      */
     public function down()
     {
-        Schema::table('courses', function($table) {
+        Schema::table('seos', function($table) {
             $table->dropColumn('subcat_id');
          });
     }

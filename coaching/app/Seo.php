@@ -23,6 +23,10 @@ class Seo extends Model
 		{
 			$this->tag_id 	= 	$field_value;
 		}
+		else if($field_name == "subcat_id")
+		{
+			$this->subcat_id 	= 	$field_value;
+		}
 		else if($field_name == "page_name")
 		{
 			$this->page_name 	= 	$field_value;

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Category;
+use App\SubCategory;
 use App\Tag;
 use App\Course;
 use App\CourseLanguage;
@@ -57,7 +58,7 @@ class AdminController extends Controller
 
 		if($category->save())
 		{
-			$image = $request->file('cat_image');
+			/*$image = $request->file('cat_image');
 		    $imageFileName = time() ."_".rand(1111,9999).'.' . $image->getClientOriginalExtension();
  		    $s3 = \Storage::disk('s3');
 		    $filePath = '/category/' . $imageFileName;
@@ -65,7 +66,7 @@ class AdminController extends Controller
 		    	$course 					= 		Category::find($category->id);
 		    	$course->cat_image 		= 		$imageFileName;
 		    	$course->save();
-		    }
+		    }*/
 
 
 
@@ -121,6 +122,111 @@ class AdminController extends Controller
 		}
 		return redirect('/admin/category'); 
 	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	//SUBCATEGORY SECTION STARTS HERE
+	public function subcategory(){
+
+		$array		= 		array(
+			"is_deleted"	=> 	0,
+			"is_active"		=> 	1,
+								);
+		$category 	= 		Category::where($array)->get();
+		$limit 	= 		100;
+		$subcat 	= 		SubCategory::where($array)->paginate($limit);
+		return view('admin/subcategory',['subcat' 	=> 	$subcat,'category'	=> 	$category,'limit'	=> 	$limit]);
+
+	}
+	public function subcategorydetails(){
+		$id 		= 	request()->segment(3);
+ 		$subcat 	= 	SubCategory::where('id',$id)->first();
+		 
+		return view('admin/subcategorydetails',['subcat' 	=> 	$subcat]);
+
+	}
+	public function addsubcategory(Request $request){
+		$data = $this->validate($request, [
+            'subcat_name'=>'required',
+        ]); 
+        $image = $request->file('subcat_image');
+	    $imageFileName = time() ."_".rand(1111,9999).'.' . $image->getClientOriginalExtension();
+		    $s3 = \Storage::disk('s3');
+	    $filePath = '/subcategory/' . $imageFileName;
+	    if(!$s3->put($filePath, file_get_contents($image), 'public')){
+	    	Session::flash('alert-danger', 'System Failure. Please try again');
+	    	return redirect('admin/subcategory');
+
+	    }
+ 		$data						=	preg_replace('/[^A-Za-z0-9-]+/','-', trim(strtolower($request->subcat_name)," "));
+		$baseslug					=	$data;	
+		$check						=	array('subcat_slug'		=>		$data);
+		$j=1;
+		while(SubCategory::where('subcat_slug', $data)->count())
+		{				
+			$data	=	$baseslug.'-'.$j;				
+			$check	=	array('subcat_slug'		=>		$data);
+			$j++;
+		}
+		$subcategory 					= 		new SubCategory();
+		$subcategory->subcat_name 		= 		$request->subcat_name;
+		$subcategory->subcat_details 	= 		$request->subcat_details;
+ 		$subcategory->subcat_slug 		= 		$data;
+ 		$subcategory->is_active 		= 		$request->is_active;
+ 		$subcategory->cat_id 			= 		$request->cat_id;
+		$subcategory->subcat_image 		= 		$imageFileName;
+
+		if($subcategory->save())
+		{
+			//echo $subcategory->id;
+			$seo 		= 	new Seo();
+			if($seo->saveseo('subcat_id',$subcategory->id,$request))
+			{
+				Session::flash('alert-success', 'Sub-Category Added Successfully');
+			}
+			else{
+				Session::flash('alert-warning', 'Sub-Category Added Successfully but seo has not been added.');
+			}
+
+		}
+		else{
+			Session::flash('alert-danger', 'System Failure. Please try again');
+
+		}
+		return redirect('/admin/subcategorydetails/'.$subcategory->id);
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 	//TAG SECTION STARTS HERE
 	public function tags(){
@@ -377,6 +483,28 @@ class AdminController extends Controller
 
  	}
 
+
+
+
+
+
+
+
+
+
+
+
+ 	//AJAX SECTION STARTS HERE
+ 	public function getsubcategory(Request $request){
+ 		echo $request->id;
+ 		$array 	= 	array(
+ 							"is_active" 	=> 		1,
+ 							"is_deleted" 	=> 		0,
+ 						);
+ 		$subcat 	= 	SubCategory::where($array)->get()->toArray();
+ 		return json_encode($subcat);
+
+ 	}
 
 }
 

@@ -59,6 +59,10 @@ Route::group(['prefix'=>'admin','middleware' => 'AdminCheck'], function(){
 	Route::post('/updatecategory','AdminController@updatecategory')->name('updatecategory');
 
 
+	//Subcategory
+	Route::get('/subcategory','AdminController@subcategory')->name('adminSubCategory');
+	Route::get('/subcategorydetails/{id}','AdminController@subcategorydetails')->name('adminSubCategoryDetails');
+	Route::post('/addsubcategory','AdminController@addsubcategory')->name('adminaddSubCategory');
 
 	//tags
 	Route::get('/tags','AdminController@tags')->name('adminTags');
@@ -85,6 +89,13 @@ Route::group(['prefix'=>'admin','middleware' => 'AdminCheck'], function(){
 	Route::get('/seo','AdminController@seo')->name('adminSeo');
 	Route::post('/saveseo','AdminController@saveseo')->name('adminSaveseo');
 	Route::post('/updateseo','AdminController@updateseo')->name('adminUpdateseo');
+
+
+
+
+
+	//AJAX
+	Route::post('/getsubcategory','AdminController@getsubcategory');
 
 });
 //Admin routes end here

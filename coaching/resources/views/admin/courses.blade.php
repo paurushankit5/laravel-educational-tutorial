@@ -32,7 +32,7 @@
           </div>
           <!-- /.box-header -->
           <div class="box-body">
-               <form class="form-horizontal" name="editcategory" method="post" action="/admin/storecourse" enctype="multipart/form-data">
+               <form class="form-horizontal" method="post" action="/admin/storecourse" enctype="multipart/form-data">
                {{ csrf_field() }} 
                 <div class="form-group">
                   <label class="control-label col-sm-2" for="course_name">Name*:</label>
@@ -43,13 +43,21 @@
                 <div class="form-group">
                   <label class="control-label col-sm-2" for="cat_id">Category*:</label>
                   <div class="col-sm-10">
-                    <select class="form-control" id="cat_id" name="cat_id" required >
+                    <select class="form-control" id="cat_id" onchange="getsubcatdetails();"  required >
                       <option value="">Select Course Category</option>
                       @if (count($category) > 0)
                         @foreach ($category as $cat)
                           <option value="{{ $cat->id }}">{{ $cat->cat_name }}</option>
                         @endforeach
                       @endif
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-sm-2" for="subcat_id">Sub-Category*:</label>
+                  <div class="col-sm-10">
+                    <select class="form-control" id="subcat_id" name="subcat_id" required >
+                      <option value="">Select Sub-Category</option>                       
                     </select>
                   </div>
                 </div>
@@ -210,7 +218,7 @@
 @section('scriptdown')
   <script src="{{ url('admin1/bower_components/ckeditor/ckeditor.js') }}"></script>  
   <script src="{{ url('admin1/bower_components/select2/dist/js/select2.full.min.js') }}"></script>
-   <script src="{{ url('admin1/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js') }}"></script>
+  <script src="{{ url('admin1/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js') }}"></script>
   <script>
     $(function () {
       // Replace the <textarea id="editor1"> with a CKEditor
@@ -219,8 +227,31 @@
        $('.select2').select2();
       //bootstrap WYSIHTML5 - text editor
       //$('.textarea').wysihtml5()
-    })
+    });
+    
+    function getsubcatdetails(){
+      var cat_id  =   $("#cat_id").val();
+      $.ajax({
+              type  :   "POST",
+              url   :   "/admin/getsubcategory",
+              data  :   {
+                          "_token"      : "{{ csrf_token() }}",
+                          "id"   : cat_id,
+               },
+              success : function(data){
 
-
+                var i =0;
+                var data  = data.slice(2,-1);
+                //data       = data.slice(1);
+                console.log(data);
+                data = JSON.parse(data);
+                $(data).each(function(i,val){
+                  console.log(i);
+                  console.log(val);
+                });
+                
+              }
+      }); 
+    }
   </script>
 @endsection
